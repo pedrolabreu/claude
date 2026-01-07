@@ -58,9 +58,9 @@
             return [
                 { label: 'Ligações Realizadas', valor: data.ligacoesRealizadas, cor: '#98a83f' },
                 { label: 'Ligações Atendidas', valor: data.ligacoesAtendidas, cor: '#a8b84f' },
-                { label: 'Formulário Respondido', valor: data.formularioRespondido, cor: '#c8d86f' },
-                { label: 'Análise Positiva', valor: data.analisePositiva, cor: '#d4a04f' },
-                { label: 'Vendas', valor: data.vendas, cor: '#a6593f' }
+                { label: 'Formulário Respondido', valor: data.formularioRespondido, cor: '#b5d909' },
+                { label: 'Análise Positiva', valor: data.analisePositiva, cor: '#82a002' },
+                { label: 'Vendas', valor: data.vendas, cor: '#46580f' }
             ];
         }
 
@@ -80,18 +80,18 @@
                 <div class="min-h-screen p-6">
                     <div class="max-w-7xl mx-auto">
                         <!-- Header -->
-                        <div class="bg-gradient-to-r from-orange-400 to-orange-500 rounded-lg shadow-lg p-8 mb-6 text-white">
+                        <div class="bg-gradient-to-r from-[#82a002] to-[#b5d909] rounded-lg shadow-lg p-8 mb-6 text-white">
                             <div class="flex justify-between items-center">
                                 <div>
                                     <h1 class="text-4xl font-bold mb-2">Dashboard Comercial e Vendas</h1>
-                                    <p class="text-orange-100">Acompanhamento em tempo real</p>
+                                    <p class="text-green-50">Acompanhamento em tempo real</p>
                                 </div>
                                 <div class="text-right">
                                     <button onclick="loadSheetData()" ${loading ? 'disabled' : ''}
-                                        class="bg-white text-orange-600 px-6 py-3 rounded-lg font-medium hover:bg-orange-50 transition-colors ${loading ? 'opacity-50' : ''}">
+                                        class="bg-white text-[#82a002] px-6 py-3 rounded-lg font-medium hover:bg-[#feffe5] transition-colors ${loading ? 'opacity-50' : ''}">
                                         ${loading ? '🔄 Atualizando...' : '🔄 Atualizar'}
                                     </button>
-                                    <p class="text-xs text-orange-100 mt-2">
+                                    <p class="text-xs text-green-50 mt-2">
                                         Última atualização: ${lastUpdate.toLocaleTimeString('pt-BR')}
                                     </p>
                                 </div>
@@ -103,7 +103,7 @@
                             <div class="flex items-center gap-4">
                                 <label class="text-gray-700 font-semibold">Selecionar Mês:</label>
                                 <select onchange="selectedMonth = this.value; render()"
-                                    class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none">
+                                    class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#82a002] outline-none">
                                     ${monthsAvailable.map(m =>
                                         `<option value="${m}" ${m === selectedMonth ? 'selected' : ''}>${monthNames[m]} 2025</option>`
                                     ).join('')}
@@ -116,21 +116,21 @@
 
                         <!-- KPIs -->
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-[#46580f]">
                                 <p class="text-gray-500 text-sm">Total de Vendas</p>
-                                <p class="text-3xl font-bold mt-2 text-green-500">${data.vendas}</p>
+                                <p class="text-3xl font-bold mt-2" style="color: #46580f">${data.vendas}</p>
                             </div>
-                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
+                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-[#82a002]">
                                 <p class="text-gray-500 text-sm">Análises Positivas</p>
-                                <p class="text-3xl font-bold mt-2 text-blue-500">${data.analisePositiva}</p>
+                                <p class="text-3xl font-bold mt-2" style="color: #82a002">${data.analisePositiva}</p>
                             </div>
-                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-pink-500">
+                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-[#98a83f]">
                                 <p class="text-gray-500 text-sm">Ligações Realizadas</p>
-                                <p class="text-3xl font-bold mt-2 text-pink-500">${data.ligacoesRealizadas}</p>
+                                <p class="text-3xl font-bold mt-2" style="color: #98a83f">${data.ligacoesRealizadas}</p>
                             </div>
-                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-amber-500">
+                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-[#b5d909]">
                                 <p class="text-gray-500 text-sm">Taxa de Conversão</p>
-                                <p class="text-3xl font-bold mt-2 text-amber-500">${taxaConversao}%</p>
+                                <p class="text-3xl font-bold mt-2" style="color: #b5d909">${taxaConversao}%</p>
                                 <p class="text-gray-400 text-xs mt-1">${data.vendas} de ${data.ligacoesRealizadas} ligações</p>
                             </div>
                         </div>
@@ -185,17 +185,17 @@
 
                         <!-- Cards Adicionais -->
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
+                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-[#a8b84f]">
                                 <p class="text-gray-500 text-sm">Ligações Atendidas</p>
-                                <p class="text-3xl font-bold mt-2 text-blue-500">${data.ligacoesAtendidas}</p>
+                                <p class="text-3xl font-bold mt-2" style="color: #a8b84f">${data.ligacoesAtendidas}</p>
                             </div>
-                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-purple-500">
+                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-[#b5d909]">
                                 <p class="text-gray-500 text-sm">Formulário Respondido</p>
-                                <p class="text-3xl font-bold mt-2 text-purple-500">${data.formularioRespondido}</p>
+                                <p class="text-3xl font-bold mt-2" style="color: #b5d909">${data.formularioRespondido}</p>
                             </div>
-                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+                            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-[#82a002]">
                                 <p class="text-gray-500 text-sm">Análise Positiva</p>
-                                <p class="text-3xl font-bold mt-2 text-green-500">${data.analisePositiva}</p>
+                                <p class="text-3xl font-bold mt-2" style="color: #82a002">${data.analisePositiva}</p>
                             </div>
                         </div>
                     </div>
