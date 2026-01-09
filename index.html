@@ -20,18 +20,18 @@
         const API_URL = '/.netlify/functions/dados';
 
         const monthsAvailable = [
-            'janeiro/2025', 'fevereiro/2025', 'marco/2025', 'abril/2025',
-            'maio/2025', 'junho/2025', 'julho/2025', 'agosto/2025',
-            'setembro/2025', 'outubro/2025', 'novembro/2025', 'dezembro/2025'
+            'janeiro/2026', 'fevereiro/2026', 'marco/2026', 'abril/2026',
+            'maio/2026', 'junho/2026', 'julho/2026', 'agosto/2026',
+            'setembro/2026', 'outubro/2026', 'novembro/2026', 'dezembro/2026'
         ];
 
         const monthNames = {
-            'janeiro/2025': 'Janeiro', 'fevereiro/2025': 'Fevereiro', 'marco/2025': 'Março', 'abril/2025': 'Abril',
-            'maio/2025': 'Maio', 'junho/2025': 'Junho', 'julho/2025': 'Julho', 'agosto/2025': 'Agosto',
-            'setembro/2025': 'Setembro', 'outubro/2025': 'Outubro', 'novembro/2025': 'Novembro', 'dezembro/2025': 'Dezembro'
+            'janeiro/2026': 'Janeiro', 'fevereiro/2026': 'Fevereiro', 'marco/2026': 'Março', 'abril/2026': 'Abril',
+            'maio/2026': 'Maio', 'junho/2026': 'Junho', 'julho/2026': 'Julho', 'agosto/2026': 'Agosto',
+            'setembro/2026': 'Setembro', 'outubro/2026': 'Outubro', 'novembro/2026': 'Novembro', 'dezembro/2026': 'Dezembro'
         };
 
-        let selectedMonth = 'janeiro/2025';
+        let selectedMonth = 'janeiro/2026';
         let sheetData = null;
         let loading = false;
         let lastUpdate = new Date();
@@ -110,11 +110,11 @@
                                 <select onchange="selectedMonth = this.value; render()"
                                     class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#82a002] outline-none">
                                     ${monthsAvailable.map(m =>
-                                        `<option value="${m}" ${m === selectedMonth ? 'selected' : ''}>${monthNames[m]} 2025</option>`
+                                        `<option value="${m}" ${m === selectedMonth ? 'selected' : ''}>${monthNames[m]} 2026</option>`
                                     ).join('')}
                                 </select>
                                 <span class="text-sm text-gray-500">
-                                    ${loading ? 'Carregando...' : `Exibindo ${monthNames[selectedMonth]} 2025`}
+                                    ${loading ? 'Carregando...' : `Exibindo ${monthNames[selectedMonth]} 2026`}
                                 </span>
                             </div>
                         </div>
@@ -143,7 +143,7 @@
                         <!-- Funil de Vendas -->
                         <div class="bg-white rounded-lg shadow p-8 mb-6">
                             <h3 class="text-xl font-semibold mb-6 text-gray-800 text-center">
-                                Funil de Conversão - ${monthNames[selectedMonth]} 2025
+                                Funil de Conversão - ${monthNames[selectedMonth]} 2026
                             </h3>
                             <div class="relative mx-auto" style="max-width: 800px;">
                                 ${funilData.map((item, idx) => {
