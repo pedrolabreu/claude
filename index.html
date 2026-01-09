@@ -19,14 +19,19 @@
         // URL da Netlify Function
         const API_URL = '/.netlify/functions/dados';
 
-        const monthsAvailable = ['maio/2025', 'junho/2025', 'julho/2025', 'agosto/2025', 'setembro/2025', 'outubro/2025', 'novembro/2025', 'dezembro/2025'];
+        const monthsAvailable = [
+            'janeiro/2025', 'fevereiro/2025', 'marco/2025', 'abril/2025',
+            'maio/2025', 'junho/2025', 'julho/2025', 'agosto/2025',
+            'setembro/2025', 'outubro/2025', 'novembro/2025', 'dezembro/2025'
+        ];
 
         const monthNames = {
+            'janeiro/2025': 'Janeiro', 'fevereiro/2025': 'Fevereiro', 'marco/2025': 'Março', 'abril/2025': 'Abril',
             'maio/2025': 'Maio', 'junho/2025': 'Junho', 'julho/2025': 'Julho', 'agosto/2025': 'Agosto',
             'setembro/2025': 'Setembro', 'outubro/2025': 'Outubro', 'novembro/2025': 'Novembro', 'dezembro/2025': 'Dezembro'
         };
 
-        let selectedMonth = 'dezembro/2025';
+        let selectedMonth = 'janeiro/2025';
         let sheetData = null;
         let loading = false;
         let lastUpdate = new Date();
