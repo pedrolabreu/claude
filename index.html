@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://script.google.com https://script.googleusercontent.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com;">
-    <title>Dashboard Comercial e Vendas - Emisfera</title>
+    <title>Dashboard Emisfera | Comercial & Marketing</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .funil-item {
@@ -39,6 +39,7 @@
         let sheetData = null;
         let loading = false;
         let lastUpdate = new Date();
+        let currentPage = 'comercial'; // 'comercial' ou 'marketing'
 
         async function loadSheetData() {
             loading = true;
@@ -78,17 +79,43 @@
             return ((atual / anterior) * 100).toFixed(2) + '%';
         }
 
-        function render() {
+        function changePage(page) {
+            currentPage = page;
+            render();
+        }
+
+        function renderNavigation() {
+            return `
+                <div class="flex gap-2 mb-6">
+                    <button onclick="changePage('comercial')"
+                        class="px-6 py-3 rounded-lg font-semibold transition-all ${
+                            currentPage === 'comercial'
+                                ? 'bg-[#82a002] text-white shadow-lg'
+                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                        }">
+                        Comercial & Vendas
+                    </button>
+                    <button onclick="changePage('marketing')"
+                        class="px-6 py-3 rounded-lg font-semibold transition-all ${
+                            currentPage === 'marketing'
+                                ? 'bg-[#82a002] text-white shadow-lg'
+                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                        }">
+                        Marketing
+                    </button>
+                </div>
+            `;
+        }
+
+        function renderComercialPage() {
             const data = getCurrentMonthData();
             const funilData = getFunilData();
             const taxaConversao = data.ligacoesRealizadas > 0
                 ? ((data.vendas / data.ligacoesRealizadas) * 100).toFixed(2)
                 : '0.00';
 
-            document.getElementById('app').innerHTML = `
-                <div class="min-h-screen p-6">
-                    <div class="max-w-7xl mx-auto">
-                        <!-- Header -->
+            return `
+                <!-- Header -->
                         <div class="bg-gradient-to-r from-[#82a002] to-[#b5d909] rounded-lg shadow-lg p-8 mb-6 text-white">
                             <div class="flex justify-between items-center">
                                 <div>
@@ -208,6 +235,73 @@
                                 <p class="text-3xl font-bold mt-2" style="color: #82a002">${data.analisePositiva}</p>
                             </div>
                         </div>
+            `;
+        }
+
+        function renderMarketingPage() {
+            return `
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-[#82a002] to-[#b5d909] rounded-lg shadow-lg p-8 mb-6 text-white">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h1 class="text-4xl font-bold mb-2">Dashboard de Marketing</h1>
+                            <p class="text-green-50">Métricas e análises de campanhas</p>
+                        </div>
+                        <div class="text-right">
+                            <button onclick="loadSheetData()" ${loading ? 'disabled' : ''}
+                                class="bg-white text-[#82a002] px-6 py-3 rounded-lg font-medium hover:bg-[#feffe5] transition-colors ${loading ? 'opacity-50' : ''}">
+                                ${loading ? '🔄 Atualizando...' : '🔄 Atualizar'}
+                            </button>
+                            <p class="text-xs text-green-50 mt-2">
+                                Última atualização: ${lastUpdate.toLocaleTimeString('pt-BR')}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtro de Mês -->
+                <div class="bg-white rounded-lg shadow p-6 mb-6">
+                    <div class="flex items-center gap-4">
+                        <label class="text-gray-700 font-semibold">Selecionar Mês:</label>
+                        <select onchange="selectedMonth = this.value; render()"
+                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#82a002] outline-none">
+                            ${monthsAvailable.map(m => {
+                                const ano = m.split('/')[1];
+                                return `<option value="${m}" ${m === selectedMonth ? 'selected' : ''}>${monthNames[m]} ${ano}</option>`;
+                            }).join('')}
+                        </select>
+                        <span class="text-sm text-gray-500">
+                            ${loading ? 'Carregando...' : `Exibindo ${monthNames[selectedMonth]} ${selectedMonth.split('/')[1]}`}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Conteúdo de Marketing (Em breve) -->
+                <div class="bg-white rounded-lg shadow p-12 mb-6 text-center">
+                    <div class="max-w-2xl mx-auto">
+                        <svg class="w-24 h-24 mx-auto mb-6 text-[#82a002]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Dashboard de Marketing</h2>
+                        <p class="text-lg text-gray-600 mb-4">
+                            Esta seção está em desenvolvimento. Em breve você terá acesso a métricas completas de marketing.
+                        </p>
+                        <p class="text-sm text-gray-500">
+                            Métricas planejadas: Campanhas, ROI, Leads, Conversões, Performance de anúncios e muito mais.
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function render() {
+            const pageContent = currentPage === 'comercial' ? renderComercialPage() : renderMarketingPage();
+
+            document.getElementById('app').innerHTML = `
+                <div class="min-h-screen p-6">
+                    <div class="max-w-7xl mx-auto">
+                        ${renderNavigation()}
+                        ${pageContent}
                     </div>
                 </div>
             `;
