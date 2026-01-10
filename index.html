@@ -10,6 +10,12 @@
         .funil-item {
             clip-path: polygon(6% 0%, 94% 0%, 100% 100%, 0% 100%);
         }
+
+        .nav-button {
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -107,7 +113,7 @@
             return `
                 <div class="flex gap-2 mb-6">
                     <button onclick="changePage('comercial')"
-                        class="px-6 py-3 rounded-lg font-semibold transition-all ${
+                        class="nav-button px-6 py-3 rounded-lg font-semibold transition-all ${
                             currentPage === 'comercial'
                                 ? 'bg-[#82a002] text-white shadow-lg'
                                 : 'bg-white text-gray-700 hover:bg-gray-100'
@@ -115,7 +121,7 @@
                         Comercial & Vendas
                     </button>
                     <button onclick="changePage('marketing')"
-                        class="px-6 py-3 rounded-lg font-semibold transition-all ${
+                        class="nav-button px-6 py-3 rounded-lg font-semibold transition-all ${
                             currentPage === 'marketing'
                                 ? 'bg-[#82a002] text-white shadow-lg'
                                 : 'bg-white text-gray-700 hover:bg-gray-100'
