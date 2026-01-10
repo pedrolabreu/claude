@@ -63,7 +63,7 @@
         }
 
         function getCurrentMonthData() {
-            return sheetData?.[selectedMonth] || {
+            const data = sheetData?.[selectedMonth] || {
                 // Dados Comercial
                 ligacoesRealizadas: 0, ligacoesAtendidas: 0,
                 formularioRespondido: 0, analisePositiva: 0, vendas: 0,
@@ -72,6 +72,8 @@
                 respostaFormulario: 0, analisePositivaMarketing: 0,
                 pitchsAgendados: 0, pitchsRealizados: 0, vendasMarketing: 0
             };
+            console.log('Dados do mês atual:', selectedMonth, data);
+            return data;
         }
 
         function getFunilData() {
@@ -111,8 +113,8 @@
 
         function renderNavigation() {
             return `
-                <div class="flex gap-2 mb-6">
-                    <button onclick="changePage('comercial')"
+                <div class="flex gap-2 mb-6" id="navigation">
+                    <button data-page="comercial"
                         class="nav-button px-6 py-3 rounded-lg font-semibold transition-all ${
                             currentPage === 'comercial'
                                 ? 'bg-[#82a002] text-white shadow-lg'
@@ -120,7 +122,7 @@
                         }">
                         Comercial & Vendas
                     </button>
-                    <button onclick="changePage('marketing')"
+                    <button data-page="marketing"
                         class="nav-button px-6 py-3 rounded-lg font-semibold transition-all ${
                             currentPage === 'marketing'
                                 ? 'bg-[#82a002] text-white shadow-lg'
@@ -148,7 +150,7 @@
                                     <p class="text-green-50">Acompanhamento em tempo real</p>
                                 </div>
                                 <div class="text-right">
-                                    <button onclick="loadSheetData()" ${loading ? 'disabled' : ''}
+                                    <button ${loading ? 'disabled' : ''}
                                         class="bg-white text-[#82a002] px-6 py-3 rounded-lg font-medium hover:bg-[#feffe5] transition-colors ${loading ? 'opacity-50' : ''}">
                                         ${loading ? '🔄 Atualizando...' : '🔄 Atualizar'}
                                     </button>
@@ -163,8 +165,7 @@
                         <div class="bg-white rounded-lg shadow p-6 mb-6">
                             <div class="flex items-center gap-4">
                                 <label class="text-gray-700 font-semibold">Selecionar Mês:</label>
-                                <select onchange="selectedMonth = this.value; render()"
-                                    class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#82a002] outline-none">
+                                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#82a002] outline-none">
                                     ${monthsAvailable.map(m => {
                                         const ano = m.split('/')[1];
                                         return `<option value="${m}" ${m === selectedMonth ? 'selected' : ''}>${monthNames[m]} ${ano}</option>`;
@@ -276,7 +277,7 @@
                             <p class="text-green-50">Métricas e análises de campanhas</p>
                         </div>
                         <div class="text-right">
-                            <button onclick="loadSheetData()" ${loading ? 'disabled' : ''}
+                            <button ${loading ? 'disabled' : ''}
                                 class="bg-white text-[#82a002] px-6 py-3 rounded-lg font-medium hover:bg-[#feffe5] transition-colors ${loading ? 'opacity-50' : ''}">
                                 ${loading ? '🔄 Atualizando...' : '🔄 Atualizar'}
                             </button>
@@ -291,8 +292,7 @@
                 <div class="bg-white rounded-lg shadow p-6 mb-6">
                     <div class="flex items-center gap-4">
                         <label class="text-gray-700 font-semibold">Selecionar Mês:</label>
-                        <select onchange="selectedMonth = this.value; render()"
-                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#82a002] outline-none">
+                        <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#82a002] outline-none">
                             ${monthsAvailable.map(m => {
                                 const ano = m.split('/')[1];
                                 return `<option value="${m}" ${m === selectedMonth ? 'selected' : ''}>${monthNames[m]} ${ano}</option>`;
@@ -374,6 +374,37 @@
             `;
         }
 
+        function setupEventListeners() {
+            // Event delegation para botões de navegação
+            const navContainer = document.getElementById('navigation');
+            if (navContainer) {
+                navContainer.addEventListener('click', function(e) {
+                    const button = e.target.closest('button[data-page]');
+                    if (button) {
+                        const page = button.getAttribute('data-page');
+                        console.log('Navegando para:', page);
+                        changePage(page);
+                    }
+                });
+            }
+
+            // Event delegation para seletor de mês
+            document.getElementById('app').addEventListener('change', function(e) {
+                if (e.target.tagName === 'SELECT') {
+                    selectedMonth = e.target.value;
+                    console.log('Mês selecionado:', selectedMonth);
+                    render();
+                }
+            });
+
+            // Event delegation para botões de atualização
+            document.getElementById('app').addEventListener('click', function(e) {
+                if (e.target.closest('button') && e.target.textContent.includes('Atualizar')) {
+                    loadSheetData();
+                }
+            });
+        }
+
         function render() {
             const pageContent = currentPage === 'comercial' ? renderComercialPage() : renderMarketingPage();
 
@@ -385,6 +416,9 @@
                     </div>
                 </div>
             `;
+
+            // Configurar event listeners após renderizar
+            setupEventListeners();
         }
 
         // Carregar dados ao iniciar
