@@ -58,8 +58,13 @@
 
         function getCurrentMonthData() {
             return sheetData?.[selectedMonth] || {
+                // Dados Comercial
                 ligacoesRealizadas: 0, ligacoesAtendidas: 0,
-                formularioRespondido: 0, analisePositiva: 0, vendas: 0
+                formularioRespondido: 0, analisePositiva: 0, vendas: 0,
+                // Dados Marketing
+                investimento: 0, visitantes: 0, cadastros: 0, mqls: 0,
+                respostaFormulario: 0, analisePositivaMarketing: 0,
+                pitchsAgendados: 0, pitchsRealizados: 0, vendasMarketing: 0
             };
         }
 
@@ -71,6 +76,20 @@
                 { label: 'Formulário Respondido', valor: data.formularioRespondido, cor: '#b5d909' },
                 { label: 'Análise Positiva', valor: data.analisePositiva, cor: '#82a002' },
                 { label: 'Vendas', valor: data.vendas, cor: '#46580f' }
+            ];
+        }
+
+        function getMarketingFunilData() {
+            const data = getCurrentMonthData();
+            return [
+                { label: 'Visitantes', valor: data.visitantes, cor: '#d3f328' },
+                { label: 'Cadastros', valor: data.cadastros, cor: '#b5d909' },
+                { label: 'Oportunidades', valor: data.mqls, cor: '#a8b84f' },
+                { label: 'Respostas Formulário', valor: data.respostaFormulario, cor: '#98a83f' },
+                { label: 'Análises Positivas', valor: data.analisePositivaMarketing, cor: '#82a002' },
+                { label: 'Pitchs Agendados', valor: data.pitchsAgendados, cor: '#6b8e23' },
+                { label: 'Pitchs Realizados', valor: data.pitchsRealizados, cor: '#556b2f' },
+                { label: 'Vendas', valor: data.vendasMarketing, cor: '#46580f' }
             ];
         }
 
@@ -239,6 +258,9 @@
         }
 
         function renderMarketingPage() {
+            const data = getCurrentMonthData();
+            const funilData = getMarketingFunilData();
+
             return `
                 <!-- Header -->
                 <div class="bg-gradient-to-r from-[#82a002] to-[#b5d909] rounded-lg shadow-lg p-8 mb-6 text-white">
@@ -276,19 +298,71 @@
                     </div>
                 </div>
 
-                <!-- Conteúdo de Marketing (Em breve) -->
-                <div class="bg-white rounded-lg shadow p-12 mb-6 text-center">
-                    <div class="max-w-2xl mx-auto">
-                        <svg class="w-24 h-24 mx-auto mb-6 text-[#82a002]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Dashboard de Marketing</h2>
-                        <p class="text-lg text-gray-600 mb-4">
-                            Esta seção está em desenvolvimento. Em breve você terá acesso a métricas completas de marketing.
-                        </p>
-                        <p class="text-sm text-gray-500">
-                            Métricas planejadas: Campanhas, ROI, Leads, Conversões, Performance de anúncios e muito mais.
-                        </p>
+                <!-- KPIs Marketing -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-[#d3f328]">
+                        <p class="text-gray-500 text-sm">Investimento</p>
+                        <p class="text-3xl font-bold mt-2" style="color: #d3f328">R$ ${data.investimento.toLocaleString('pt-BR')}</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-[#b5d909]">
+                        <p class="text-gray-500 text-sm">Cadastros</p>
+                        <p class="text-3xl font-bold mt-2" style="color: #b5d909">${data.cadastros}</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-[#82a002]">
+                        <p class="text-gray-500 text-sm">MQLs</p>
+                        <p class="text-3xl font-bold mt-2" style="color: #82a002">${data.mqls}</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-[#46580f]">
+                        <p class="text-gray-500 text-sm">Vendas</p>
+                        <p class="text-3xl font-bold mt-2" style="color: #46580f">${data.vendasMarketing}</p>
+                    </div>
+                </div>
+
+                <!-- Funil de Marketing -->
+                <div class="bg-white rounded-lg shadow p-8 mb-6">
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800 text-center">
+                        Funil de Conversão de Marketing - ${monthNames[selectedMonth]} ${selectedMonth.split('/')[1]}
+                    </h3>
+                    <div class="relative mx-auto" style="max-width: 800px;">
+                        ${funilData.map((item, idx) => {
+                            const w = 95 - (idx * 8);
+                            const taxa = idx > 0 ? calcularTaxa(item.valor, funilData[idx - 1].valor) : null;
+                            return `
+                                <div class="relative mb-3">
+                                    <div class="funil-item relative mx-auto flex items-center justify-center text-white font-bold"
+                                        style="width: ${w}%; height: 70px; background-color: ${item.cor}; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                        <span class="text-3xl z-10">${item.valor}</span>
+                                    </div>
+                                    <div class="flex items-center justify-between mt-2 px-4">
+                                        <span class="text-base font-semibold text-gray-700">${item.label}</span>
+                                        ${taxa ? `<span class="text-base font-bold text-gray-900 bg-gray-100 px-3 py-1 rounded">${taxa}</span>` : ''}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+                <!-- Análise Detalhada Marketing -->
+                <div class="bg-white rounded-lg shadow p-6 mb-6">
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800">Análise Detalhada do Funil de Marketing</h3>
+                    <div class="space-y-4">
+                        ${funilData.map((item, idx) => {
+                            const percentual = data.visitantes > 0 ? (item.valor / data.visitantes * 100) : 0;
+                            const taxa = idx > 0 ? calcularTaxa(item.valor, funilData[idx - 1].valor) : null;
+                            return `
+                                <div class="border-l-4 p-4 bg-gray-50 rounded" style="border-left-color: ${item.cor}">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-semibold text-gray-700">${item.label}</span>
+                                        <span class="text-2xl font-bold" style="color: ${item.cor}">${item.valor}</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="h-2 rounded-full" style="width: ${percentual}%; background-color: ${item.cor}"></div>
+                                    </div>
+                                    ${taxa ? `<p class="text-sm text-gray-500 mt-2">Taxa de conversão: ${taxa}</p>` : ''}
+                                </div>
+                            `;
+                        }).join('')}
                     </div>
                 </div>
             `;
