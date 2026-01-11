@@ -63,7 +63,7 @@
         }
 
         function getCurrentMonthData() {
-            const data = sheetData?.[selectedMonth] || {
+            const defaultData = {
                 // Dados Comercial
                 ligacoesRealizadas: 0, ligacoesAtendidas: 0,
                 formularioRespondido: 0, analisePositiva: 0, vendas: 0,
@@ -75,6 +75,11 @@
                 receitaTotal: 0, receitaPIN: 0, receitaMonitoramento: 0,
                 roi: 0, cac: 0, ticketMedio: 0, cicloVendas: 0
             };
+
+            // Merge dos dados do sheet com os valores padrão
+            const sheetMonthData = sheetData?.[selectedMonth] || {};
+            const data = { ...defaultData, ...sheetMonthData };
+
             console.log('Dados do mês atual:', selectedMonth, data);
             return data;
         }
