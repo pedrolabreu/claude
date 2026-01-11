@@ -209,3 +209,49 @@ function testarLeitura() {
 
   Logger.log('\n✅ Tudo OK! Agora implante o script como Web App.');
 }
+
+/**
+ * DEBUG: Função para verificar células específicas de dados financeiros
+ * Execute esta função para ver o que realmente está em cada célula
+ */
+function debugFinanceiro() {
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = spreadsheet.getSheetByName('RESUMO_DADOS');
+
+  if (!sheet) {
+    Logger.log('❌ ERRO: Aba "RESUMO_DADOS" não encontrada!');
+    Logger.log('Abas disponíveis:');
+    spreadsheet.getSheets().forEach(s => Logger.log('  - ' + s.getName()));
+    return;
+  }
+
+  Logger.log('🔍 DEBUG - Verificando células financeiras (Coluna B = Maio/2025)\n');
+
+  const celulas = [
+    { nome: 'Receita Total', celula: 'B22' },
+    { nome: 'Receita PIN', celula: 'B23' },
+    { nome: 'Receita Monitoramento', celula: 'B24' },
+    { nome: 'ROI', celula: 'B30' },
+    { nome: 'CAC', celula: 'B31' },
+    { nome: 'Ticket Médio', celula: 'B32' },
+    { nome: 'Ciclo de Vendas', celula: 'B33' }
+  ];
+
+  celulas.forEach(item => {
+    const valor = sheet.getRange(item.celula).getValue();
+    const tipo = typeof valor;
+    const estaVazio = (valor === null || valor === undefined || valor === '');
+
+    Logger.log(`${item.nome} (${item.celula}):`);
+    Logger.log(`  Valor bruto: ${valor}`);
+    Logger.log(`  Tipo: ${tipo}`);
+    Logger.log(`  Está vazio: ${estaVazio}`);
+    Logger.log(`  Após processamento: ${getNumericValue(sheet, item.celula)}\n`);
+  });
+
+  Logger.log('✅ Debug concluído!');
+  Logger.log('Se os valores estão vazios, verifique se:');
+  Logger.log('1. A aba se chama exatamente "RESUMO_DADOS" (maiúsculas e underline)');
+  Logger.log('2. Os dados financeiros estão nas linhas 22, 23, 24, 30, 31, 32, 33');
+  Logger.log('3. Os dados estão na coluna B para maio/2025');
+}
