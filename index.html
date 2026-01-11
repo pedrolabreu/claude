@@ -54,9 +54,18 @@
                 const response = await fetch(API_URL);
                 sheetData = await response.json();
                 lastUpdate = new Date();
-                console.log('Dados carregados:', sheetData);
+                console.log('📊 Dados carregados:', sheetData);
+                console.log('💰 Dados financeiros de maio/2025:', {
+                    receitaTotal: sheetData?.['maio/2025']?.receitaTotal,
+                    receitaPIN: sheetData?.['maio/2025']?.receitaPIN,
+                    receitaMonitoramento: sheetData?.['maio/2025']?.receitaMonitoramento,
+                    roi: sheetData?.['maio/2025']?.roi,
+                    cac: sheetData?.['maio/2025']?.cac,
+                    ticketMedio: sheetData?.['maio/2025']?.ticketMedio,
+                    cicloVendas: sheetData?.['maio/2025']?.cicloVendas
+                });
             } catch (error) {
-                console.error('Erro:', error);
+                console.error('❌ Erro ao carregar dados:', error);
             }
             loading = false;
             render();
