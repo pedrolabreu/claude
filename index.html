@@ -109,15 +109,10 @@
             return ((atual / anterior) * 100).toFixed(2) + '%';
         }
 
-        function changePage(page) {
-            currentPage = page;
-            render();
-        }
-
         function renderNavigation() {
             return `
                 <div class="flex gap-2 mb-6" id="navigation">
-                    <button data-page="comercial"
+                    <button type="button" data-page="comercial"
                         class="nav-button px-6 py-3 rounded-lg font-semibold transition-all ${
                             currentPage === 'comercial'
                                 ? 'bg-[#82a002] text-white shadow-lg'
@@ -125,7 +120,7 @@
                         }">
                         Comercial & Vendas
                     </button>
-                    <button data-page="marketing"
+                    <button type="button" data-page="marketing"
                         class="nav-button px-6 py-3 rounded-lg font-semibold transition-all ${
                             currentPage === 'marketing'
                                 ? 'bg-[#82a002] text-white shadow-lg'
@@ -133,7 +128,7 @@
                         }">
                         Marketing
                     </button>
-                    <button data-page="financeiro"
+                    <button type="button" data-page="financeiro"
                         class="nav-button px-6 py-3 rounded-lg font-semibold transition-all ${
                             currentPage === 'financeiro'
                                 ? 'bg-[#82a002] text-white shadow-lg'
@@ -492,18 +487,24 @@
 
         // Event delegation para botões de navegação (usando document para garantir funcionamento)
         document.addEventListener('click', function(e) {
+            // Tenta encontrar um botão com data-page
             const button = e.target.closest('button[data-page]');
+
             if (button) {
                 e.preventDefault();
                 e.stopPropagation();
                 const page = button.getAttribute('data-page');
-                console.log('Navegando para:', page);
-                changePage(page);
+                console.log('Botão clicado:', page);
+                console.log('currentPage antes:', currentPage);
+                currentPage = page;
+                console.log('currentPage depois:', currentPage);
+                render();
                 return;
             }
 
             // Event delegation para botões de atualização
-            if (e.target.closest('button') && e.target.textContent.includes('Atualizar')) {
+            const updateButton = e.target.closest('button');
+            if (updateButton && updateButton.textContent.includes('Atualizar')) {
                 e.preventDefault();
                 loadSheetData();
             }
