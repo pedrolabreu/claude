@@ -70,7 +70,19 @@ Os dados são extraídos automaticamente da planilha Google Sheets através do G
 
 - **Planilha**: [Link](https://docs.google.com/spreadsheets/d/13MQbv3f92bZNHeHU9rkNTEvodu3Y1wMTjbw9ZmmNgiY/)
 - **Aba**: `RESUMO_DADOS`
-- **Colunas**: C-J (2025) + K-V (2026)
+- **Colunas**: B-I (2025) + J-U (2026)
+- **Apps Script URL**: https://script.google.com/macros/s/AKfycbw9iv2q5ksjs64BouGnvbx1x7PeOt2QayYod4X7vfR08ermVLs4XTtenIjt6ziO1Kv_pw/exec
+
+### Mapeamento de Colunas:
+- **2025 (Mai-Dez)**: Colunas B-I
+  - Maio/2025 → Coluna B
+  - Junho/2025 → Coluna C
+  - ... até Dezembro/2025 → Coluna I
+
+- **2026 (Jan-Dez)**: Colunas J-U
+  - Janeiro/2026 → Coluna J
+  - Fevereiro/2026 → Coluna K
+  - ... até Dezembro/2026 → Coluna U
 
 ## 🛠️ Como Atualizar Dados
 
@@ -104,6 +116,24 @@ Google Sheets (RESUMO_DADOS)
 - `#d3f328` - Verde claro
 - `#98a83f` - Verde oliva
 - `#46580f` - Verde escuro
+
+## ✅ Estado do Projeto
+
+**STATUS**: 🟢 **FUNCIONANDO 100%**
+
+**Última Atualização**: 11/01/2025
+
+- ✅ Dashboard em produção: https://claude-omega-azure.vercel.app/
+- ✅ Dados sincronizados com Google Sheets
+- ✅ Navegação entre abas funcionando
+- ✅ 20 meses de dados (Mai/2025 - Dez/2026)
+- ✅ Mapeamento de colunas correto (B-I, J-U)
+- ✅ Deploy automático via GitHub → Vercel
+- ✅ Backup na Netlify configurado
+
+**Versão Atual do Apps Script**: v4 (Colunas B-I e J-U corrigidas)
+
+---
 
 ## 📝 Licença
 
