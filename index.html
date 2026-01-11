@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://script.google.com https://script.googleusercontent.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com;">
-    <title>Dashboard Emisfera | Comercial & Marketing</title>
+    <title>Dashboard Emisfera | Comercial, Marketing & Financeiro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .funil-item {
@@ -54,18 +54,8 @@
                 const response = await fetch(API_URL);
                 sheetData = await response.json();
                 lastUpdate = new Date();
-                console.log('📊 Dados carregados:', sheetData);
-                console.log('💰 Dados financeiros de maio/2025:', {
-                    receitaTotal: sheetData?.['maio/2025']?.receitaTotal,
-                    receitaPIN: sheetData?.['maio/2025']?.receitaPIN,
-                    receitaMonitoramento: sheetData?.['maio/2025']?.receitaMonitoramento,
-                    roi: sheetData?.['maio/2025']?.roi,
-                    cac: sheetData?.['maio/2025']?.cac,
-                    ticketMedio: sheetData?.['maio/2025']?.ticketMedio,
-                    cicloVendas: sheetData?.['maio/2025']?.cicloVendas
-                });
             } catch (error) {
-                console.error('❌ Erro ao carregar dados:', error);
+                console.error('Erro ao carregar dados:', error);
             }
             loading = false;
             render();
@@ -73,24 +63,17 @@
 
         function getCurrentMonthData() {
             const defaultData = {
-                // Dados Comercial
                 ligacoesRealizadas: 0, ligacoesAtendidas: 0,
                 formularioRespondido: 0, analisePositiva: 0, vendas: 0,
-                // Dados Marketing
                 investimento: 0, visitantes: 0, cadastros: 0, mqls: 0,
                 respostaFormulario: 0, analisePositivaMarketing: 0,
                 pitchsAgendados: 0, pitchsRealizados: 0, vendasMarketing: 0,
-                // Dados Financeiros
                 receitaTotal: 0, receitaPIN: 0, receitaMonitoramento: 0,
                 roi: 0, cac: 0, ticketMedio: 0, cicloVendas: 0
             };
 
-            // Merge dos dados do sheet com os valores padrão
             const sheetMonthData = sheetData?.[selectedMonth] || {};
-            const data = { ...defaultData, ...sheetMonthData };
-
-            console.log('Dados do mês atual:', selectedMonth, data);
-            return data;
+            return { ...defaultData, ...sheetMonthData };
         }
 
         function getFunilData() {
@@ -499,24 +482,17 @@
             `;
         }
 
-        // Event delegation para botões de navegação (usando document para garantir funcionamento)
+        // Event delegation para botões de navegação
         document.addEventListener('click', function(e) {
-            // Tenta encontrar um botão com data-page
             const button = e.target.closest('button[data-page]');
-
             if (button) {
                 e.preventDefault();
                 e.stopPropagation();
-                const page = button.getAttribute('data-page');
-                console.log('Botão clicado:', page);
-                console.log('currentPage antes:', currentPage);
-                currentPage = page;
-                console.log('currentPage depois:', currentPage);
+                currentPage = button.getAttribute('data-page');
                 render();
                 return;
             }
 
-            // Event delegation para botões de atualização
             const updateButton = e.target.closest('button');
             if (updateButton && updateButton.textContent.includes('Atualizar')) {
                 e.preventDefault();
@@ -528,7 +504,6 @@
         document.addEventListener('change', function(e) {
             if (e.target.tagName === 'SELECT') {
                 selectedMonth = e.target.value;
-                console.log('Mês selecionado:', selectedMonth);
                 render();
             }
         });

@@ -163,13 +163,9 @@ function testarLeitura() {
   const result = doGet();
   const data = JSON.parse(result.getContent());
 
-  // Verificar se há erro
   if (data.error) {
     Logger.log('❌ ERRO: ' + data.error);
     Logger.log('Mensagem: ' + data.message);
-    if (data.hint) {
-      Logger.log('Dica: ' + data.hint);
-    }
     if (data.availableSheets) {
       Logger.log('Abas disponíveis: ' + data.availableSheets.join(', '));
     }
@@ -179,79 +175,12 @@ function testarLeitura() {
   Logger.log('✅ Dados carregados com sucesso!');
   Logger.log('Total de meses: ' + Object.keys(data).length);
 
-  // Verificar maio/2025
   if (data['maio/2025']) {
-    Logger.log('\n📊 Dados de Maio/2025:');
-    Logger.log('\n  === MARKETING ===');
-    Logger.log('  Investimento: R$ ' + data['maio/2025'].investimento);
-    Logger.log('  Visitantes: ' + data['maio/2025'].visitantes);
-    Logger.log('  Cadastros: ' + data['maio/2025'].cadastros);
-    Logger.log('  MQLs: ' + data['maio/2025'].mqls);
-    Logger.log('  Pitchs Agendados: ' + data['maio/2025'].pitchsAgendados);
-    Logger.log('  Pitchs Realizados: ' + data['maio/2025'].pitchsRealizados);
-
-    Logger.log('\n  === COMERCIAL & VENDAS ===');
-    Logger.log('  Ligações Realizadas: ' + data['maio/2025'].ligacoesRealizadas);
-    Logger.log('  Ligações Atendidas: ' + data['maio/2025'].ligacoesAtendidas);
-    Logger.log('  Formulário Respondido: ' + data['maio/2025'].formularioRespondido);
-    Logger.log('  Análise Positiva: ' + data['maio/2025'].analisePositiva);
-    Logger.log('  Vendas: ' + data['maio/2025'].vendas);
-
-    Logger.log('\n  === FINANCEIRO ===');
-    Logger.log('  Receita Total: R$ ' + data['maio/2025'].receitaTotal);
-    Logger.log('  Receita PIN: R$ ' + data['maio/2025'].receitaPIN);
-    Logger.log('  Receita Monitoramento: R$ ' + data['maio/2025'].receitaMonitoramento);
-    Logger.log('  ROI: ' + data['maio/2025'].roi + '%');
-    Logger.log('  CAC: R$ ' + data['maio/2025'].cac);
-    Logger.log('  Ticket Médio: R$ ' + data['maio/2025'].ticketMedio);
-    Logger.log('  Ciclo de Vendas: ' + data['maio/2025'].cicloVendas + ' dias');
+    Logger.log('\nExemplo - Dados de Maio/2025:');
+    Logger.log('  Marketing: Investimento R$ ' + data['maio/2025'].investimento);
+    Logger.log('  Comercial: Ligações ' + data['maio/2025'].ligacoesRealizadas);
+    Logger.log('  Financeiro: Receita Total R$ ' + data['maio/2025'].receitaTotal);
   }
 
-  Logger.log('\n✅ Tudo OK! Agora implante o script como Web App.');
-}
-
-/**
- * DEBUG: Função para verificar células específicas de dados financeiros
- * Execute esta função para ver o que realmente está em cada célula
- */
-function debugFinanceiro() {
-  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-  const sheet = spreadsheet.getSheetByName('RESUMO_DADOS');
-
-  if (!sheet) {
-    Logger.log('❌ ERRO: Aba "RESUMO_DADOS" não encontrada!');
-    Logger.log('Abas disponíveis:');
-    spreadsheet.getSheets().forEach(s => Logger.log('  - ' + s.getName()));
-    return;
-  }
-
-  Logger.log('🔍 DEBUG - Verificando células financeiras (Coluna B = Maio/2025)\n');
-
-  const celulas = [
-    { nome: 'Receita Total', celula: 'B22' },
-    { nome: 'Receita PIN', celula: 'B23' },
-    { nome: 'Receita Monitoramento', celula: 'B24' },
-    { nome: 'ROI', celula: 'B30' },
-    { nome: 'CAC', celula: 'B31' },
-    { nome: 'Ticket Médio', celula: 'B32' },
-    { nome: 'Ciclo de Vendas', celula: 'B33' }
-  ];
-
-  celulas.forEach(item => {
-    const valor = sheet.getRange(item.celula).getValue();
-    const tipo = typeof valor;
-    const estaVazio = (valor === null || valor === undefined || valor === '');
-
-    Logger.log(`${item.nome} (${item.celula}):`);
-    Logger.log(`  Valor bruto: ${valor}`);
-    Logger.log(`  Tipo: ${tipo}`);
-    Logger.log(`  Está vazio: ${estaVazio}`);
-    Logger.log(`  Após processamento: ${getNumericValue(sheet, item.celula)}\n`);
-  });
-
-  Logger.log('✅ Debug concluído!');
-  Logger.log('Se os valores estão vazios, verifique se:');
-  Logger.log('1. A aba se chama exatamente "RESUMO_DADOS" (maiúsculas e underline)');
-  Logger.log('2. Os dados financeiros estão nas linhas 22, 23, 24, 30, 31, 32, 33');
-  Logger.log('3. Os dados estão na coluna B para maio/2025');
+  Logger.log('\n✅ Tudo OK! Script funcionando corretamente.');
 }
