@@ -96,6 +96,12 @@ function doGet(e) {
         vendas: getNumericValue(sheet, col + '16'),
         vendasMarketing: getNumericValue(sheet, col + '16'), // mesmo valor
 
+        // ===== QUANTIDADE DE VENDAS POR TIPO =====
+        qtdVendasPin: getNumericValue(sheet, col + '17'),
+        qtdVendasMonitoramento: getNumericValue(sheet, col + '18'),
+        qtdVendasInbound: getNumericValue(sheet, col + '19'),
+        qtdVendasOutbound: getNumericValue(sheet, col + '20'),
+
         // ===== DADOS FINANCEIROS =====
         receitaTotal: getNumericValue(sheet, col + '22'),
         receitaPIN: getNumericValue(sheet, col + '23'),

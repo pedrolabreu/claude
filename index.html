@@ -68,6 +68,8 @@
                 investimento: 0, visitantes: 0, cadastros: 0, mqls: 0,
                 respostaFormulario: 0, analisePositivaMarketing: 0,
                 pitchsAgendados: 0, pitchsRealizados: 0, vendasMarketing: 0,
+                qtdVendasPin: 0, qtdVendasMonitoramento: 0,
+                qtdVendasInbound: 0, qtdVendasOutbound: 0,
                 receitaTotal: 0, receitaPIN: 0, receitaMonitoramento: 0,
                 roi: 0, cac: 0, ticketMedio: 0, cicloVendas: 0
             };
@@ -431,6 +433,30 @@
                     <div class="bg-white rounded-lg shadow p-8 border-l-4 border-[#98a83f]">
                         <p class="text-gray-500 text-sm mb-2">RECEITA MONITORAMENTO</p>
                         <p class="text-4xl font-bold" style="color: #98a83f">R$ ${data.receitaMonitoramento.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    </div>
+                </div>
+
+                <!-- Quantidade de Vendas por Tipo -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow p-8 border-l-4 border-[#a8b84f]">
+                        <p class="text-gray-500 text-sm mb-2">Quantidade de Vendas Pin</p>
+                        <p class="text-4xl font-bold" style="color: #a8b84f">${data.qtdVendasPin}</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-8 border-l-4 border-[#98a83f]">
+                        <p class="text-gray-500 text-sm mb-2">Quantidade de vendas Monitoramento</p>
+                        <p class="text-4xl font-bold" style="color: #98a83f">${data.qtdVendasMonitoramento}</p>
+                    </div>
+                </div>
+
+                <!-- Quantidade de Vendas Inbound e Outbound -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow p-8 border-l-4 border-[#82a002]">
+                        <p class="text-gray-500 text-sm mb-2">Quantidade de Vendas Inbound</p>
+                        <p class="text-4xl font-bold" style="color: #82a002">${data.qtdVendasInbound}</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-8 border-l-4 border-[#6b8e23]">
+                        <p class="text-gray-500 text-sm mb-2">Quantidade de Vendas Outbound</p>
+                        <p class="text-4xl font-bold" style="color: #6b8e23">${data.qtdVendasOutbound}</p>
                     </div>
                 </div>
 
