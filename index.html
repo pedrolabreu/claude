@@ -490,42 +490,39 @@
             `;
         }
 
-        // Configurar event listeners e iniciar aplicação
-        document.addEventListener('DOMContentLoaded', function() {
-            const appContainer = document.getElementById('app');
-
-            // Event delegation para botões de navegação
-            appContainer.addEventListener('click', function(e) {
-                const button = e.target.closest('button[data-page]');
-                if (button) {
-                    const page = button.getAttribute('data-page');
-                    console.log('Navegando para:', page);
-                    changePage(page);
-                }
-            });
-
-            // Event delegation para seletor de mês
-            appContainer.addEventListener('change', function(e) {
-                if (e.target.tagName === 'SELECT') {
-                    selectedMonth = e.target.value;
-                    console.log('Mês selecionado:', selectedMonth);
-                    render();
-                }
-            });
+        // Event delegation para botões de navegação (usando document para garantir funcionamento)
+        document.addEventListener('click', function(e) {
+            const button = e.target.closest('button[data-page]');
+            if (button) {
+                e.preventDefault();
+                e.stopPropagation();
+                const page = button.getAttribute('data-page');
+                console.log('Navegando para:', page);
+                changePage(page);
+                return;
+            }
 
             // Event delegation para botões de atualização
-            appContainer.addEventListener('click', function(e) {
-                if (e.target.closest('button') && e.target.textContent.includes('Atualizar')) {
-                    loadSheetData();
-                }
-            });
-
-            // Carregar dados ao iniciar (dentro do DOMContentLoaded)
-            loadSheetData();
-
-            // Atualizar a cada 5 minutos
-            setInterval(loadSheetData, 300000);
+            if (e.target.closest('button') && e.target.textContent.includes('Atualizar')) {
+                e.preventDefault();
+                loadSheetData();
+            }
         });
+
+        // Event delegation para seletor de mês
+        document.addEventListener('change', function(e) {
+            if (e.target.tagName === 'SELECT') {
+                selectedMonth = e.target.value;
+                console.log('Mês selecionado:', selectedMonth);
+                render();
+            }
+        });
+
+        // Carregar dados ao iniciar
+        loadSheetData();
+
+        // Atualizar a cada 5 minutos
+        setInterval(loadSheetData, 300000);
     </script>
 </body>
 </html>
