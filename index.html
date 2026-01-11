@@ -470,37 +470,6 @@
             `;
         }
 
-        function setupEventListeners() {
-            // Event delegation para botões de navegação
-            const navContainer = document.getElementById('navigation');
-            if (navContainer) {
-                navContainer.addEventListener('click', function(e) {
-                    const button = e.target.closest('button[data-page]');
-                    if (button) {
-                        const page = button.getAttribute('data-page');
-                        console.log('Navegando para:', page);
-                        changePage(page);
-                    }
-                });
-            }
-
-            // Event delegation para seletor de mês
-            document.getElementById('app').addEventListener('change', function(e) {
-                if (e.target.tagName === 'SELECT') {
-                    selectedMonth = e.target.value;
-                    console.log('Mês selecionado:', selectedMonth);
-                    render();
-                }
-            });
-
-            // Event delegation para botões de atualização
-            document.getElementById('app').addEventListener('click', function(e) {
-                if (e.target.closest('button') && e.target.textContent.includes('Atualizar')) {
-                    loadSheetData();
-                }
-            });
-        }
-
         function render() {
             let pageContent;
             if (currentPage === 'comercial') {
@@ -519,10 +488,38 @@
                     </div>
                 </div>
             `;
-
-            // Configurar event listeners após renderizar
-            setupEventListeners();
         }
+
+        // Configurar event listeners uma única vez usando event delegation
+        document.addEventListener('DOMContentLoaded', function() {
+            const appContainer = document.getElementById('app');
+
+            // Event delegation para botões de navegação
+            appContainer.addEventListener('click', function(e) {
+                const button = e.target.closest('button[data-page]');
+                if (button) {
+                    const page = button.getAttribute('data-page');
+                    console.log('Navegando para:', page);
+                    changePage(page);
+                }
+            });
+
+            // Event delegation para seletor de mês
+            appContainer.addEventListener('change', function(e) {
+                if (e.target.tagName === 'SELECT') {
+                    selectedMonth = e.target.value;
+                    console.log('Mês selecionado:', selectedMonth);
+                    render();
+                }
+            });
+
+            // Event delegation para botões de atualização
+            appContainer.addEventListener('click', function(e) {
+                if (e.target.closest('button') && e.target.textContent.includes('Atualizar')) {
+                    loadSheetData();
+                }
+            });
+        });
 
         // Carregar dados ao iniciar
         loadSheetData();
