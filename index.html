@@ -490,7 +490,7 @@
             `;
         }
 
-        // Configurar event listeners uma única vez usando event delegation
+        // Configurar event listeners e iniciar aplicação
         document.addEventListener('DOMContentLoaded', function() {
             const appContainer = document.getElementById('app');
 
@@ -519,13 +519,13 @@
                     loadSheetData();
                 }
             });
+
+            // Carregar dados ao iniciar (dentro do DOMContentLoaded)
+            loadSheetData();
+
+            // Atualizar a cada 5 minutos
+            setInterval(loadSheetData, 300000);
         });
-
-        // Carregar dados ao iniciar
-        loadSheetData();
-
-        // Atualizar a cada 5 minutos
-        setInterval(loadSheetData, 300000);
     </script>
 </body>
 </html>
