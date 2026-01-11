@@ -45,7 +45,7 @@
         let sheetData = null;
         let loading = false;
         let lastUpdate = new Date();
-        let currentPage = 'comercial'; // 'comercial' ou 'marketing'
+        let currentPage = 'comercial'; // 'comercial', 'marketing' ou 'financeiro'
 
         async function loadSheetData() {
             loading = true;
@@ -70,7 +70,10 @@
                 // Dados Marketing
                 investimento: 0, visitantes: 0, cadastros: 0, mqls: 0,
                 respostaFormulario: 0, analisePositivaMarketing: 0,
-                pitchsAgendados: 0, pitchsRealizados: 0, vendasMarketing: 0
+                pitchsAgendados: 0, pitchsRealizados: 0, vendasMarketing: 0,
+                // Dados Financeiros
+                receitaTotal: 0, receitaPIN: 0, receitaMonitoramento: 0,
+                roi: 0, cac: 0, ticketMedio: 0, cicloVendas: 0
             };
             console.log('Dados do mês atual:', selectedMonth, data);
             return data;
@@ -129,6 +132,14 @@
                                 : 'bg-white text-gray-700 hover:bg-gray-100'
                         }">
                         Marketing
+                    </button>
+                    <button data-page="financeiro"
+                        class="nav-button px-6 py-3 rounded-lg font-semibold transition-all ${
+                            currentPage === 'financeiro'
+                                ? 'bg-[#82a002] text-white shadow-lg'
+                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                        }">
+                        Financeiro
                     </button>
                 </div>
             `;
@@ -374,6 +385,91 @@
             `;
         }
 
+        function renderFinanceiroPage() {
+            const data = getCurrentMonthData();
+
+            return `
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-[#82a002] to-[#b5d909] rounded-lg shadow-lg p-8 mb-6 text-white">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h1 class="text-4xl font-bold mb-2">Dashboard Financeiro</h1>
+                            <p class="text-green-50">Métricas financeiras e indicadores</p>
+                        </div>
+                        <div class="text-right">
+                            <button ${loading ? 'disabled' : ''}
+                                class="bg-white text-[#82a002] px-6 py-3 rounded-lg font-medium hover:bg-[#feffe5] transition-colors ${loading ? 'opacity-50' : ''}">
+                                ${loading ? '🔄 Atualizando...' : '🔄 Atualizar'}
+                            </button>
+                            <p class="text-xs text-green-50 mt-2">
+                                Última atualização: ${lastUpdate.toLocaleTimeString('pt-BR')}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtro de Mês -->
+                <div class="bg-white rounded-lg shadow p-6 mb-6">
+                    <div class="flex items-center gap-4">
+                        <label class="text-gray-700 font-semibold">Selecionar Mês:</label>
+                        <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#82a002] outline-none">
+                            ${monthsAvailable.map(m => {
+                                const ano = m.split('/')[1];
+                                return `<option value="${m}" ${m === selectedMonth ? 'selected' : ''}>${monthNames[m]} ${ano}</option>`;
+                            }).join('')}
+                        </select>
+                        <span class="text-sm text-gray-500">
+                            ${loading ? 'Carregando...' : `Exibindo ${monthNames[selectedMonth]} ${selectedMonth.split('/')[1]}`}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Receita Total (Grande) -->
+                <div class="bg-white rounded-lg shadow p-8 mb-6 border-l-4 border-[#82a002]">
+                    <p class="text-gray-500 text-sm mb-2">RECEITA TOTAL</p>
+                    <p class="text-5xl font-bold" style="color: #82a002">R$ ${data.receitaTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                </div>
+
+                <!-- Receita PIN e Receita Monitoramento -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow p-8 border-l-4 border-[#b5d909]">
+                        <p class="text-gray-500 text-sm mb-2">RECEITA PIN</p>
+                        <p class="text-4xl font-bold" style="color: #b5d909">R$ ${data.receitaPIN.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-8 border-l-4 border-[#98a83f]">
+                        <p class="text-gray-500 text-sm mb-2">RECEITA MONITORAMENTO</p>
+                        <p class="text-4xl font-bold" style="color: #98a83f">R$ ${data.receitaMonitoramento.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    </div>
+                </div>
+
+                <!-- CAC e ROI -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow p-8 border-l-4 border-[#d3f328]">
+                        <p class="text-gray-500 text-sm mb-2">CAC</p>
+                        <p class="text-gray-600 text-xs mb-1">Custo de Aquisição de Cliente</p>
+                        <p class="text-4xl font-bold" style="color: #d3f328">R$ ${data.cac.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-8 border-l-4 border-[#46580f]">
+                        <p class="text-gray-500 text-sm mb-2">ROI</p>
+                        <p class="text-gray-600 text-xs mb-1">Retorno sobre Investimento</p>
+                        <p class="text-4xl font-bold" style="color: #46580f">${data.roi.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}%</p>
+                    </div>
+                </div>
+
+                <!-- Ticket Médio e Ciclo de Vendas -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow p-8 border-l-4 border-[#6b8e23]">
+                        <p class="text-gray-500 text-sm mb-2">TICKET MÉDIO</p>
+                        <p class="text-4xl font-bold" style="color: #6b8e23">R$ ${data.ticketMedio.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-8 border-l-4 border-[#556b2f]">
+                        <p class="text-gray-500 text-sm mb-2">CICLO DE VENDAS</p>
+                        <p class="text-4xl font-bold" style="color: #556b2f">${data.cicloVendas} <span class="text-2xl">dias</span></p>
+                    </div>
+                </div>
+            `;
+        }
+
         function setupEventListeners() {
             // Event delegation para botões de navegação
             const navContainer = document.getElementById('navigation');
@@ -406,7 +502,14 @@
         }
 
         function render() {
-            const pageContent = currentPage === 'comercial' ? renderComercialPage() : renderMarketingPage();
+            let pageContent;
+            if (currentPage === 'comercial') {
+                pageContent = renderComercialPage();
+            } else if (currentPage === 'marketing') {
+                pageContent = renderMarketingPage();
+            } else if (currentPage === 'financeiro') {
+                pageContent = renderFinanceiroPage();
+            }
 
             document.getElementById('app').innerHTML = `
                 <div class="min-h-screen p-6">

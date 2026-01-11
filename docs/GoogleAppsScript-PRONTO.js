@@ -94,7 +94,16 @@ function doGet(e) {
 
         // ===== VENDAS (usado em ambos) =====
         vendas: getNumericValue(sheet, col + '16'),
-        vendasMarketing: getNumericValue(sheet, col + '16') // mesmo valor
+        vendasMarketing: getNumericValue(sheet, col + '16'), // mesmo valor
+
+        // ===== DADOS FINANCEIROS =====
+        receitaTotal: getNumericValue(sheet, col + '22'),
+        receitaPIN: getNumericValue(sheet, col + '23'),
+        receitaMonitoramento: getNumericValue(sheet, col + '24'),
+        roi: getNumericValue(sheet, col + '30'),
+        cac: getNumericValue(sheet, col + '31'),
+        ticketMedio: getNumericValue(sheet, col + '32'),
+        cicloVendas: getNumericValue(sheet, col + '33')
       };
     });
 
@@ -172,18 +181,30 @@ function testarLeitura() {
 
   // Verificar maio/2025
   if (data['maio/2025']) {
-    Logger.log('\n📊 Exemplo: Dados de Maio/2025:');
+    Logger.log('\n📊 Dados de Maio/2025:');
+    Logger.log('\n  === MARKETING ===');
     Logger.log('  Investimento: R$ ' + data['maio/2025'].investimento);
     Logger.log('  Visitantes: ' + data['maio/2025'].visitantes);
     Logger.log('  Cadastros: ' + data['maio/2025'].cadastros);
     Logger.log('  MQLs: ' + data['maio/2025'].mqls);
+    Logger.log('  Pitchs Agendados: ' + data['maio/2025'].pitchsAgendados);
+    Logger.log('  Pitchs Realizados: ' + data['maio/2025'].pitchsRealizados);
+
+    Logger.log('\n  === COMERCIAL & VENDAS ===');
     Logger.log('  Ligações Realizadas: ' + data['maio/2025'].ligacoesRealizadas);
     Logger.log('  Ligações Atendidas: ' + data['maio/2025'].ligacoesAtendidas);
     Logger.log('  Formulário Respondido: ' + data['maio/2025'].formularioRespondido);
     Logger.log('  Análise Positiva: ' + data['maio/2025'].analisePositiva);
-    Logger.log('  Pitchs Agendados: ' + data['maio/2025'].pitchsAgendados);
-    Logger.log('  Pitchs Realizados: ' + data['maio/2025'].pitchsRealizados);
     Logger.log('  Vendas: ' + data['maio/2025'].vendas);
+
+    Logger.log('\n  === FINANCEIRO ===');
+    Logger.log('  Receita Total: R$ ' + data['maio/2025'].receitaTotal);
+    Logger.log('  Receita PIN: R$ ' + data['maio/2025'].receitaPIN);
+    Logger.log('  Receita Monitoramento: R$ ' + data['maio/2025'].receitaMonitoramento);
+    Logger.log('  ROI: ' + data['maio/2025'].roi + '%');
+    Logger.log('  CAC: R$ ' + data['maio/2025'].cac);
+    Logger.log('  Ticket Médio: R$ ' + data['maio/2025'].ticketMedio);
+    Logger.log('  Ciclo de Vendas: ' + data['maio/2025'].cicloVendas + ' dias');
   }
 
   Logger.log('\n✅ Tudo OK! Agora implante o script como Web App.');
