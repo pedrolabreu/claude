@@ -21,11 +21,11 @@ function doGet(e) {
   try {
     // Usar ID da planilha ao invés de getActiveSpreadsheet()
     const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-    const sheet = spreadsheet.getSheetByName('Resumo de Dados');
+    const sheet = spreadsheet.getSheetByName('RESUMO_DADOS');
 
     if (!sheet) {
       return ContentService.createTextOutput(JSON.stringify({
-        error: 'Aba "Resumo de Dados" não encontrada',
+        error: 'Aba "RESUMO_DADOS" não encontrada',
         availableSheets: spreadsheet.getSheets().map(s => s.getName())
       })).setMimeType(ContentService.MimeType.JSON);
     }
@@ -33,32 +33,32 @@ function doGet(e) {
     const data = {};
 
     // Mapeamento de colunas para meses
-    // Meses de 2025: Maio a Dezembro (colunas C a J)
+    // Meses de 2025: Maio a Dezembro (colunas B a I)
     const meses2025 = [
-      { mes: 'maio/2025', col: 'C' },
-      { mes: 'junho/2025', col: 'D' },
-      { mes: 'julho/2025', col: 'E' },
-      { mes: 'agosto/2025', col: 'F' },
-      { mes: 'setembro/2025', col: 'G' },
-      { mes: 'outubro/2025', col: 'H' },
-      { mes: 'novembro/2025', col: 'I' },
-      { mes: 'dezembro/2025', col: 'J' }
+      { mes: 'maio/2025', col: 'B' },
+      { mes: 'junho/2025', col: 'C' },
+      { mes: 'julho/2025', col: 'D' },
+      { mes: 'agosto/2025', col: 'E' },
+      { mes: 'setembro/2025', col: 'F' },
+      { mes: 'outubro/2025', col: 'G' },
+      { mes: 'novembro/2025', col: 'H' },
+      { mes: 'dezembro/2025', col: 'I' }
     ];
 
-    // Meses de 2026: Janeiro a Dezembro (colunas K a V)
+    // Meses de 2026: Janeiro a Dezembro (colunas J a U)
     const meses2026 = [
-      { mes: 'janeiro/2026', col: 'K' },
-      { mes: 'fevereiro/2026', col: 'L' },
-      { mes: 'marco/2026', col: 'M' },
-      { mes: 'abril/2026', col: 'N' },
-      { mes: 'maio/2026', col: 'O' },
-      { mes: 'junho/2026', col: 'P' },
-      { mes: 'julho/2026', col: 'Q' },
-      { mes: 'agosto/2026', col: 'R' },
-      { mes: 'setembro/2026', col: 'S' },
-      { mes: 'outubro/2026', col: 'T' },
-      { mes: 'novembro/2026', col: 'U' },
-      { mes: 'dezembro/2026', col: 'V' }
+      { mes: 'janeiro/2026', col: 'J' },
+      { mes: 'fevereiro/2026', col: 'K' },
+      { mes: 'marco/2026', col: 'L' },
+      { mes: 'abril/2026', col: 'M' },
+      { mes: 'maio/2026', col: 'N' },
+      { mes: 'junho/2026', col: 'O' },
+      { mes: 'julho/2026', col: 'P' },
+      { mes: 'agosto/2026', col: 'Q' },
+      { mes: 'setembro/2026', col: 'R' },
+      { mes: 'outubro/2026', col: 'S' },
+      { mes: 'novembro/2026', col: 'T' },
+      { mes: 'dezembro/2026', col: 'U' }
     ];
 
     // Combinar todos os meses
