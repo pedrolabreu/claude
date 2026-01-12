@@ -7,6 +7,30 @@
     <title>Dashboard Emisfera | Comercial, Marketing & Financeiro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8f5e9 100%);
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(130, 160, 2, 0.03) 35px, rgba(130, 160, 2, 0.03) 70px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(181, 217, 9, 0.02) 35px, rgba(181, 217, 9, 0.02) 70px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #app {
+            position: relative;
+            z-index: 1;
+        }
+
         .funil-item {
             clip-path: polygon(6% 0%, 94% 0%, 100% 100%, 0% 100%);
         }
@@ -16,9 +40,37 @@
             position: relative;
             z-index: 10;
         }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .logo-container img {
+            height: 60px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2d5016;
+        }
+
+        .logo-subtitle {
+            font-size: 14px;
+            color: #82a002;
+            font-weight: 500;
+        }
     </style>
 </head>
-<body class="bg-gray-50">
+<body>
     <div id="app"></div>
 
     <script>
@@ -501,6 +553,20 @@
             document.getElementById('app').innerHTML = `
                 <div class="min-h-screen p-6">
                     <div class="max-w-7xl mx-auto">
+                        <!-- Logo Emisfera -->
+                        <div class="logo-container">
+                            <svg width="60" height="60" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="100" cy="100" r="95" fill="#2d5016" stroke="#82a002" stroke-width="4"/>
+                                <path d="M100 50 L140 80 L130 120 L100 140 L70 120 L60 80 Z" fill="#82a002"/>
+                                <circle cx="80" cy="90" r="8" fill="white"/>
+                                <circle cx="120" cy="90" r="8" fill="white"/>
+                                <path d="M70 110 Q100 130 130 110" stroke="white" stroke-width="4" fill="none"/>
+                            </svg>
+                            <div>
+                                <div class="logo-text">EMISFERA AGRO</div>
+                                <div class="logo-subtitle">CRÉDITO DE CARBONO</div>
+                            </div>
+                        </div>
                         ${renderNavigation()}
                         ${pageContent}
                     </div>
