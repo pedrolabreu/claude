@@ -357,39 +357,39 @@
                     <!-- COLUNA ESQUERDA: KPIs -->
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-content: start;">
                         <!-- Vendas -->
-                        <div class="card">
+                        <div class="card" style="border-left: 4px solid #b5d909;">
                             <div class="card-label">💰 Vendas</div>
-                            <div class="card-value" style="color: #46580f;">${data.vendas}</div>
+                            <div class="card-value" style="color: #ffffff;">${data.vendas}</div>
                         </div>
 
                         <!-- Análise Positiva -->
-                        <div class="card">
+                        <div class="card" style="border-left: 4px solid #82a002;">
                             <div class="card-label">✓ Análise +</div>
-                            <div class="card-value" style="color: #82a002;">${data.analisePositiva}</div>
+                            <div class="card-value" style="color: #ffffff;">${data.analisePositiva}</div>
                         </div>
 
                         <!-- Ligações Realizadas -->
-                        <div class="card">
+                        <div class="card" style="border-left: 4px solid #98a83f;">
                             <div class="card-label">📞 Ligações</div>
-                            <div class="card-value" style="color: #98a83f;">${data.ligacoesRealizadas}</div>
+                            <div class="card-value" style="color: #ffffff;">${data.ligacoesRealizadas}</div>
                         </div>
 
                         <!-- Taxa de Conversão -->
-                        <div class="card">
+                        <div class="card" style="border-left: 4px solid #d3f328;">
                             <div class="card-label">% Conversão</div>
-                            <div class="card-value" style="color: #b5d909;">${taxaConversao}%</div>
+                            <div class="card-value" style="color: #ffffff;">${taxaConversao}%</div>
                         </div>
 
                         <!-- Ligações Atendidas -->
-                        <div class="card">
+                        <div class="card" style="border-left: 4px solid #a8b84f;">
                             <div class="card-label">✓ Atendidas</div>
-                            <div class="card-value" style="color: #a8b84f; font-size: 2.5rem;">${data.ligacoesAtendidas}</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2.5rem;">${data.ligacoesAtendidas}</div>
                         </div>
 
                         <!-- Formulário Respondido -->
-                        <div class="card">
+                        <div class="card" style="border-left: 4px solid #b5d909;">
                             <div class="card-label">📋 Formulário</div>
-                            <div class="card-value" style="color: #b5d909; font-size: 2.5rem;">${data.formularioRespondido}</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2.5rem;">${data.formularioRespondido}</div>
                         </div>
                     </div>
 
@@ -404,15 +404,15 @@
                                 const percentual = data.ligacoesRealizadas > 0 ? (item.valor / data.ligacoesRealizadas * 100) : 0;
                                 return `
                                     <div class="funil-bar" style="border-left-color: ${item.cor};">
-                                        <div>
-                                            <div class="funil-label">${item.label}</div>
-                                            <div class="progress-wrapper" style="width: 350px; margin-top: 6px;">
+                                        <div style="flex: 1; min-width: 0;">
+                                            <div class="funil-label" style="color: #ffffff;">${item.label}</div>
+                                            <div class="progress-wrapper" style="margin-top: 6px;">
                                                 <div class="progress-fill" style="width: ${percentual}%; background-color: ${item.cor};"></div>
                                             </div>
                                         </div>
-                                        <div style="display: flex; align-items: center; gap: 16px;">
+                                        <div style="display: flex; align-items: center; gap: 16px; flex-shrink: 0;">
                                             <span class="funil-taxa">${taxa}</span>
-                                            <span class="funil-value" style="color: ${item.cor};">${item.valor}</span>
+                                            <span class="funil-value" style="color: #ffffff;">${item.valor}</span>
                                         </div>
                                     </div>
                                 `;
@@ -433,36 +433,36 @@
             const funilData = getMarketingFunilData();
 
             return `
-                <div style="display: grid; grid-template-columns: 25% 50% 25%; gap: 20px; height: calc(100vh - 110px);">
+                <div style="display: grid; grid-template-columns: 190px 1fr 270px; gap: 16px; height: calc(100vh - 110px); min-width: 0; overflow: hidden;">
                     <!-- COLUNA 1: KPIs -->
-                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; flex-direction: column; gap: 12px; min-width: 0;">
                         <!-- Investimento -->
-                        <div class="card">
+                        <div class="card" style="padding: 14px; border-left: 4px solid #d3f328;">
                             <div class="card-label">💰 Investimento</div>
-                            <div class="card-value" style="color: #d3f328; font-size: 2rem;">R$ ${(data.investimento/1000).toFixed(0)}k</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 1.5rem;">R$ ${(data.investimento/1000).toFixed(0)}k</div>
                         </div>
 
                         <!-- Cadastros -->
-                        <div class="card">
+                        <div class="card" style="padding: 14px; border-left: 4px solid #b5d909;">
                             <div class="card-label">📝 Cadastros</div>
-                            <div class="card-value" style="color: #b5d909; font-size: 2.5rem;">${data.cadastros}</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2rem;">${data.cadastros}</div>
                         </div>
 
                         <!-- MQLs -->
-                        <div class="card">
+                        <div class="card" style="padding: 14px; border-left: 4px solid #82a002;">
                             <div class="card-label">🎯 MQLs</div>
-                            <div class="card-value" style="color: #82a002; font-size: 2.5rem;">${data.mqls}</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2rem;">${data.mqls}</div>
                         </div>
 
                         <!-- Vendas Marketing -->
-                        <div class="card">
+                        <div class="card" style="padding: 14px; border-left: 4px solid #b5d909;">
                             <div class="card-label">✓ Vendas</div>
-                            <div class="card-value" style="color: #46580f; font-size: 2.5rem;">${data.vendasMarketing}</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2rem;">${data.vendasMarketing}</div>
                         </div>
                     </div>
 
                     <!-- COLUNA 2: Funil Marketing (8 níveis) -->
-                    <div class="card" style="padding: 20px; overflow-y: auto;">
+                    <div class="card" style="padding: 20px; overflow-y: auto; min-width: 0;">
                         <h3 style="font-size: 1.3rem; color: #b5d909; margin-bottom: 16px; text-align: center; font-weight: bold;">
                             FUNIL DE MARKETING
                         </h3>
@@ -470,11 +470,11 @@
                             ${funilData.map((item, idx) => {
                                 const taxa = idx > 0 ? calcularTaxa(item.valor, funilData[idx - 1].valor) : '100.00%';
                                 return `
-                                    <div class="funil-bar" style="border-left-color: ${item.cor}; padding: 8px 16px;">
-                                        <div class="funil-label" style="font-size: 0.9rem;">${item.label}</div>
-                                        <div style="display: flex; align-items: center; gap: 12px;">
-                                            <span class="funil-taxa" style="font-size: 0.8rem;">${taxa}</span>
-                                            <span class="funil-value" style="color: ${item.cor}; font-size: 1.5rem;">${item.valor}</span>
+                                    <div class="funil-bar" style="border-left-color: ${item.cor}; padding: 10px 16px;">
+                                        <div class="funil-label" style="font-size: 0.95rem; color: #ffffff;">${item.label}</div>
+                                        <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
+                                            <span class="funil-taxa" style="font-size: 0.85rem;">${taxa}</span>
+                                            <span class="funil-value" style="color: #ffffff; font-size: 1.6rem; min-width: 55px; text-align: right;">${item.valor}</span>
                                         </div>
                                     </div>
                                 `;
@@ -483,24 +483,24 @@
                     </div>
 
                     <!-- COLUNA 3: Análise Detalhada (barras de progresso) -->
-                    <div class="card" style="padding: 20px; overflow-y: auto;">
+                    <div class="card" style="padding: 20px; overflow-y: auto; min-width: 0; box-sizing: border-box;">
                         <h3 style="font-size: 1.1rem; color: #b5d909; margin-bottom: 16px; font-weight: bold;">
                             ANÁLISE
                         </h3>
-                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div style="display: flex; flex-direction: column; gap: 14px;">
                             ${funilData.map((item) => {
                                 const percentual = data.visitantes > 0 ? (item.valor / data.visitantes * 100) : 0;
                                 return `
-                                    <div>
-                                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                                            <span style="color: rgba(181, 217, 9, 0.7); font-size: 0.75rem; font-weight: 600;">${item.label}</span>
-                                            <span style="color: ${item.cor}; font-size: 0.9rem; font-weight: bold;">${item.valor}</span>
+                                    <div style="min-width: 0;">
+                                        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; gap: 6px;">
+                                            <span style="color: rgba(255,255,255,0.75); font-size: 0.75rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0;">${item.label}</span>
+                                            <span style="color: #ffffff; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">${item.valor}</span>
                                         </div>
                                         <div class="progress-wrapper">
                                             <div class="progress-fill" style="width: ${percentual}%; background-color: ${item.cor};"></div>
                                         </div>
-                                        <div style="text-align: right; margin-top: 4px;">
-                                            <span style="color: rgba(181, 217, 9, 0.5); font-size: 0.7rem;">${percentual.toFixed(1)}%</span>
+                                        <div style="text-align: right; margin-top: 3px;">
+                                            <span style="color: rgba(181, 217, 9, 0.65); font-size: 0.7rem;">${percentual.toFixed(1)}%</span>
                                         </div>
                                     </div>
                                 `;
@@ -517,9 +517,9 @@
             return `
                 <div style="display: flex; flex-direction: column; gap: 16px; height: calc(100vh - 110px);">
                     <!-- LINHA 1: Receita Total (destaque) -->
-                    <div class="card" style="padding: 24px; text-align: center; border-left: 4px solid #82a002;">
+                    <div class="card" style="padding: 24px; text-align: center; border-left: 4px solid #b5d909;">
                         <div class="card-label">💰 RECEITA TOTAL</div>
-                        <div style="font-size: 3.5rem; font-weight: bold; color: #82a002; text-shadow: 0 0 20px rgba(130, 160, 2, 0.3);">
+                        <div style="font-size: 3.5rem; font-weight: bold; color: #ffffff; text-shadow: 0 0 20px rgba(181, 217, 9, 0.3);">
                             R$ ${(data.receitaTotal/1000).toFixed(0)}k
                         </div>
                     </div>
@@ -529,25 +529,25 @@
                         <!-- Receita PIN -->
                         <div class="card" style="border-left: 4px solid #b5d909;">
                             <div class="card-label">Receita PIN</div>
-                            <div class="card-value" style="color: #b5d909; font-size: 2rem;">R$ ${(data.receitaPIN/1000).toFixed(0)}k</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2rem;">R$ ${(data.receitaPIN/1000).toFixed(0)}k</div>
                         </div>
 
                         <!-- Receita Monitoramento -->
                         <div class="card" style="border-left: 4px solid #98a83f;">
                             <div class="card-label">Rec. Monitor.</div>
-                            <div class="card-value" style="color: #98a83f; font-size: 2rem;">R$ ${(data.receitaMonitoramento/1000).toFixed(0)}k</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2rem;">R$ ${(data.receitaMonitoramento/1000).toFixed(0)}k</div>
                         </div>
 
                         <!-- CAC -->
                         <div class="card" style="border-left: 4px solid #d3f328;">
                             <div class="card-label">CAC</div>
-                            <div class="card-value" style="color: #d3f328; font-size: 2rem;">R$ ${data.cac.toFixed(0)}</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2rem;">R$ ${data.cac.toFixed(0)}</div>
                         </div>
 
                         <!-- ROI -->
-                        <div class="card" style="border-left: 4px solid #46580f;">
+                        <div class="card" style="border-left: 4px solid #82a002;">
                             <div class="card-label">ROI</div>
-                            <div class="card-value" style="color: #46580f; font-size: 2rem;">${data.roi.toFixed(2)}</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2rem;">${data.roi.toFixed(2)}</div>
                         </div>
                     </div>
 
@@ -556,25 +556,25 @@
                         <!-- Qtd Vendas PIN -->
                         <div class="card" style="border-left: 4px solid #a8b84f;">
                             <div class="card-label">Vendas PIN</div>
-                            <div class="card-value" style="color: #a8b84f; font-size: 2.5rem;">${data.qtdVendasPin}</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2.5rem;">${data.qtdVendasPin}</div>
                         </div>
 
                         <!-- Qtd Vendas Monitoramento -->
                         <div class="card" style="border-left: 4px solid #98a83f;">
                             <div class="card-label">Vendas Monitor.</div>
-                            <div class="card-value" style="color: #98a83f; font-size: 2.5rem;">${data.qtdVendasMonitoramento}</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2.5rem;">${data.qtdVendasMonitoramento}</div>
                         </div>
 
                         <!-- Qtd Vendas Inbound -->
                         <div class="card" style="border-left: 4px solid #82a002;">
                             <div class="card-label">Vendas Inbound</div>
-                            <div class="card-value" style="color: #82a002; font-size: 2.5rem;">${data.qtdVendasInbound}</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2.5rem;">${data.qtdVendasInbound}</div>
                         </div>
 
                         <!-- Qtd Vendas Outbound -->
                         <div class="card" style="border-left: 4px solid #6b8e23;">
                             <div class="card-label">Vendas Outbound</div>
-                            <div class="card-value" style="color: #6b8e23; font-size: 2.5rem;">${data.qtdVendasOutbound}</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2.5rem;">${data.qtdVendasOutbound}</div>
                         </div>
                     </div>
 
@@ -583,13 +583,13 @@
                         <!-- Ticket Médio -->
                         <div class="card" style="border-left: 4px solid #6b8e23; padding: 28px;">
                             <div class="card-label">💳 TICKET MÉDIO</div>
-                            <div class="card-value" style="color: #6b8e23; font-size: 2.5rem;">R$ ${(data.ticketMedio/1000).toFixed(1)}k</div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2.5rem;">R$ ${(data.ticketMedio/1000).toFixed(1)}k</div>
                         </div>
 
                         <!-- Ciclo de Vendas -->
                         <div class="card" style="border-left: 4px solid #556b2f; padding: 28px;">
                             <div class="card-label">⏱️ CICLO DE VENDAS</div>
-                            <div class="card-value" style="color: #556b2f; font-size: 2.5rem;">${data.cicloVendas} <span style="font-size: 1.5rem;">dias</span></div>
+                            <div class="card-value" style="color: #ffffff; font-size: 2.5rem;">${data.cicloVendas} <span style="font-size: 1.5rem;">dias</span></div>
                         </div>
                     </div>
                 </div>
