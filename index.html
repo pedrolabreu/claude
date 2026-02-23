@@ -280,18 +280,24 @@
         let selectedMonth = 'maio/2025';
         let sheetData = null;
         let loading = false;
+        let loadError = false;
         let lastUpdate = new Date();
         let currentPage = 'comercial'; // 'comercial', 'marketing' ou 'financeiro'
 
         async function loadSheetData() {
             loading = true;
+            loadError = false;
             render();
             try {
-                const response = await fetch(API_URL);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000);
+                const response = await fetch(API_URL, { signal: controller.signal });
+                clearTimeout(timeoutId);
                 sheetData = await response.json();
                 lastUpdate = new Date();
             } catch (error) {
                 console.error('Erro ao carregar dados:', error);
+                loadError = true;
             }
             loading = false;
             render();
@@ -642,7 +648,12 @@
                             <button class="update-btn" ${loading ? 'disabled' : ''}>
                                 ${loading ? '🔄 Atualizando...' : '🔄 Atualizar'}
                             </button>
-                            <div class="last-update">${lastUpdate.toLocaleTimeString('pt-BR')}</div>
+                            <div class="last-update">
+                                ${loadError
+                                    ? '<span style="color: #ff6b6b;">⚠ Erro ao carregar dados</span>'
+                                    : lastUpdate.toLocaleTimeString('pt-BR')
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
