@@ -7,6 +7,20 @@
     <title>Dashboard Emisfera | Comercial, Marketing & Financeiro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* PALETA EMISFERA */
+        :root {
+            --verde-principal:    #82a002;
+            --verde-limao:        #b5d909;
+            --verde-claro:        #d3f328;
+            --verde-oliva:        #98a83f;
+            --verde-escuro:       #46580f;
+            --verde-muito-escuro: #253102;
+            --cinza-claro:        #f5f7f9;
+            --cinza-escuro:       #43474e;
+            --amarelo-verde:      #e5fc5a;
+            --verde-medio:        #a4ce3a;
+        }
+
         /* DARK MODE - VERDE EMISFERA */
         * {
             margin: 0;
@@ -96,15 +110,15 @@
         }
 
         .nav-button.active {
-            background: linear-gradient(135deg, #82a002, #b5d909);
+            background: linear-gradient(135deg, var(--verde-principal), var(--verde-limao));
             color: #0a140b;
-            box-shadow: 0 4px 12px rgba(181, 217, 9, 0.3);
+            box-shadow: 0 4px 14px rgba(229, 252, 90, 0.35);
         }
 
         .nav-button:not(.active) {
             background: rgba(26, 45, 20, 0.6);
-            color: rgba(181, 217, 9, 0.8);
-            border: 1px solid rgba(130, 160, 2, 0.25);
+            color: rgba(181, 217, 9, 0.85);
+            border: 1px solid rgba(164, 206, 58, 0.4);
         }
 
         /* HEADER RIGHT */
@@ -131,9 +145,9 @@
         }
 
         .update-btn {
-            background: rgba(181, 217, 9, 0.15);
-            color: #b5d909;
-            border: 1px solid rgba(181, 217, 9, 0.3);
+            background: rgba(229, 252, 90, 0.12);
+            color: var(--amarelo-verde);
+            border: 1px solid rgba(229, 252, 90, 0.4);
             padding: 8px 16px;
             border-radius: 8px;
             font-size: 0.85rem;
@@ -142,13 +156,13 @@
         }
 
         .update-btn:hover {
-            background: rgba(181, 217, 9, 0.25);
-            box-shadow: 0 0 12px rgba(181, 217, 9, 0.2);
+            background: rgba(229, 252, 90, 0.22);
+            box-shadow: 0 0 12px rgba(229, 252, 90, 0.25);
         }
 
         .last-update {
             font-size: 0.7rem;
-            color: rgba(181, 217, 9, 0.5);
+            color: var(--cinza-escuro);
         }
 
         /* MAIN CONTENT AREA */
@@ -197,7 +211,7 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: rgba(181, 217, 9, 0.6);
+            color: rgba(229, 252, 90, 0.75);
             font-weight: 600;
         }
 
@@ -216,7 +230,7 @@
 
         .funil-bar:hover {
             transform: translateX(5px);
-            box-shadow: 0 0 20px rgba(181, 217, 9, 0.15);
+            box-shadow: 0 0 20px rgba(229, 252, 90, 0.18);
         }
 
         .funil-label {
@@ -233,7 +247,7 @@
 
         .funil-taxa {
             font-size: 0.9rem;
-            color: rgba(181, 217, 9, 0.7);
+            color: var(--cinza-escuro);
             margin-left: 12px;
         }
 
@@ -335,7 +349,7 @@
             const data = getCurrentMonthData();
             return [
                 { label: 'Ligações Realizadas', valor: data.ligacoesRealizadas, cor: '#98a83f' },
-                { label: 'Ligações Atendidas', valor: data.ligacoesAtendidas, cor: '#a8b84f' },
+                { label: 'Ligações Atendidas', valor: data.ligacoesAtendidas, cor: '#a4ce3a' },
                 { label: 'Formulário Respondido', valor: data.formularioRespondido, cor: '#b5d909' },
                 { label: 'Análise Positiva', valor: data.analisePositiva, cor: '#82a002' },
                 { label: 'Vendas', valor: data.vendas, cor: '#46580f' }
@@ -347,11 +361,11 @@
             return [
                 { label: 'Visitantes', valor: data.visitantes, cor: '#d3f328' },
                 { label: 'Cadastros', valor: data.cadastros, cor: '#b5d909' },
-                { label: 'Oportunidades', valor: data.mqls, cor: '#a8b84f' },
+                { label: 'Oportunidades', valor: data.mqls, cor: '#a4ce3a' },
                 { label: 'Respostas Formulário', valor: data.respostaFormulario, cor: '#98a83f' },
                 { label: 'Análises Positivas', valor: data.analisePositivaMarketing, cor: '#82a002' },
-                { label: 'Pitchs Agendados', valor: data.pitchsAgendados, cor: '#6b8e23' },
-                { label: 'Pitchs Realizados', valor: data.pitchsRealizados, cor: '#556b2f' },
+                { label: 'Pitchs Agendados', valor: data.pitchsAgendados, cor: '#46580f' },
+                { label: 'Pitchs Realizados', valor: data.pitchsRealizados, cor: '#253102' },
                 { label: 'Vendas', valor: data.vendasMarketing, cor: '#46580f' }
             ];
         }
@@ -400,7 +414,7 @@
                         <!-- Ligações Atendidas -->
                         <div class="card">
                             <div class="card-label">✓ Atendidas</div>
-                            <div class="card-value" style="color: #a8b84f; font-size: 2.5rem;">${data.ligacoesAtendidas}</div>
+                            <div class="card-value" style="color: #a4ce3a; font-size: 2.5rem;">${data.ligacoesAtendidas}</div>
                         </div>
 
                         <!-- Formulário Respondido -->
@@ -435,8 +449,8 @@
                                 `;
                             }).join('')}
                         </div>
-                        <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(130, 160, 2, 0.2); text-align: center;">
-                            <span style="color: rgba(181, 217, 9, 0.6); font-size: 0.9rem;">
+                        <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(229, 252, 90, 0.2); text-align: center;">
+                            <span style="color: #43474e; font-size: 0.9rem;">
                                 Taxa de Conversão Total: ${taxaConversao}% | ${data.vendas} vendas de ${data.ligacoesRealizadas} ligações
                             </span>
                         </div>
@@ -510,14 +524,14 @@
                                 return `
                                     <div>
                                         <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                                            <span style="color: rgba(181, 217, 9, 0.7); font-size: 0.75rem; font-weight: 600;">${item.label}</span>
+                                            <span style="color: #43474e; font-size: 0.75rem; font-weight: 600;">${item.label}</span>
                                             <span style="color: ${item.cor}; font-size: 0.9rem; font-weight: bold;">${item.valor}</span>
                                         </div>
                                         <div class="progress-wrapper">
                                             <div class="progress-fill" style="width: ${percentual}%; background-color: ${item.cor};"></div>
                                         </div>
                                         <div style="text-align: right; margin-top: 4px;">
-                                            <span style="color: rgba(181, 217, 9, 0.5); font-size: 0.7rem;">${percentual.toFixed(1)}%</span>
+                                            <span style="color: #43474e; font-size: 0.7rem;">${percentual.toFixed(1)}%</span>
                                         </div>
                                     </div>
                                 `;
@@ -534,7 +548,7 @@
             return `
                 <div style="display: flex; flex-direction: column; gap: 16px; height: calc(100vh - 110px);">
                     <!-- LINHA 1: Receita Total (destaque) -->
-                    <div class="card" style="padding: 24px; text-align: center; border-left: 4px solid #82a002;">
+                    <div class="card" style="padding: 24px; text-align: center; border-left: 4px solid #e5fc5a;">
                         <div class="card-label">💰 RECEITA TOTAL</div>
                         <div style="font-size: 3.5rem; font-weight: bold; color: #82a002; text-shadow: 0 0 20px rgba(130, 160, 2, 0.3);">
                             R$ ${(data.receitaTotal/1000).toFixed(0)}k
@@ -571,9 +585,9 @@
                     <!-- LINHA 3: Grid 4 colunas - Quantidade de Vendas -->
                     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
                         <!-- Qtd Vendas PIN -->
-                        <div class="card" style="border-left: 4px solid #a8b84f;">
+                        <div class="card" style="border-left: 4px solid #a4ce3a;">
                             <div class="card-label">Vendas PIN</div>
-                            <div class="card-value" style="color: #a8b84f; font-size: 2.5rem;">${data.qtdVendasPin}</div>
+                            <div class="card-value" style="color: #a4ce3a; font-size: 2.5rem;">${data.qtdVendasPin}</div>
                         </div>
 
                         <!-- Qtd Vendas Monitoramento -->
@@ -589,24 +603,24 @@
                         </div>
 
                         <!-- Qtd Vendas Outbound -->
-                        <div class="card" style="border-left: 4px solid #6b8e23;">
+                        <div class="card" style="border-left: 4px solid #46580f;">
                             <div class="card-label">Vendas Outbound</div>
-                            <div class="card-value" style="color: #6b8e23; font-size: 2.5rem;">${data.qtdVendasOutbound}</div>
+                            <div class="card-value" style="color: #46580f; font-size: 2.5rem;">${data.qtdVendasOutbound}</div>
                         </div>
                     </div>
 
                     <!-- LINHA 4: Grid 2 colunas - Ticket Médio e Ciclo -->
                     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
                         <!-- Ticket Médio -->
-                        <div class="card" style="border-left: 4px solid #6b8e23; padding: 28px;">
+                        <div class="card" style="border-left: 4px solid #46580f; padding: 28px;">
                             <div class="card-label">💳 TICKET MÉDIO</div>
-                            <div class="card-value" style="color: #6b8e23; font-size: 2.5rem;">R$ ${(data.ticketMedio/1000).toFixed(1)}k</div>
+                            <div class="card-value" style="color: #46580f; font-size: 2.5rem;">R$ ${(data.ticketMedio/1000).toFixed(1)}k</div>
                         </div>
 
                         <!-- Ciclo de Vendas -->
-                        <div class="card" style="border-left: 4px solid #556b2f; padding: 28px;">
+                        <div class="card" style="border-left: 4px solid #253102; padding: 28px;">
                             <div class="card-label">⏱️ CICLO DE VENDAS</div>
-                            <div class="card-value" style="color: #556b2f; font-size: 2.5rem;">${data.cicloVendas} <span style="font-size: 1.5rem;">dias</span></div>
+                            <div class="card-value" style="color: #253102; font-size: 2.5rem;">${data.cicloVendas} <span style="font-size: 1.5rem;">dias</span></div>
                         </div>
                     </div>
                 </div>
