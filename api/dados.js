@@ -18,6 +18,9 @@ export default async function handler(req, res) {
   }
 
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+
     const response = await fetch(APPS_SCRIPT_URL, {
       method: 'GET',
       headers: {
@@ -26,8 +29,11 @@ export default async function handler(req, res) {
         'Cache-Control': 'no-cache'
       },
       redirect: 'follow',
-      cache: 'no-store'
+      cache: 'no-store',
+      signal: controller.signal
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       throw new Error(`Apps Script error: ${response.status}`);

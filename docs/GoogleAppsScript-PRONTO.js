@@ -120,7 +120,7 @@ function doGet(e) {
     return ContentService.createTextOutput(JSON.stringify({
       error: error.toString(),
       message: 'Erro ao processar dados',
-      hint: 'Verifique se a aba se chama "Resumo de Dados" e se os dados estão nas colunas C-V'
+      hint: 'Verifique se a aba se chama "RESUMO_DADOS" e se os dados estão nas colunas B-U'
     })).setMimeType(ContentService.MimeType.JSON);
   }
 }
