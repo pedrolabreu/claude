@@ -198,7 +198,8 @@
         .card-value {
             font-size: 3rem;
             font-weight: bold;
-            text-shadow: 0 0 20px rgba(181, 217, 9, 0.15);
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
             animation: pulse 2s ease-in-out infinite;
         }
 
@@ -242,7 +243,8 @@
         .funil-value {
             font-size: 1.8rem;
             font-weight: bold;
-            text-shadow: 0 0 12px rgba(181, 217, 9, 0.2);
+            color: #ffffff;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
         }
 
         .funil-taxa {
@@ -390,37 +392,37 @@
                         <!-- Vendas -->
                         <div class="card">
                             <div class="card-label">💰 Vendas</div>
-                            <div class="card-value" style="color: #46580f;">${data.vendas}</div>
+                            <div class="card-value">${data.vendas}</div>
                         </div>
 
                         <!-- Análise Positiva -->
                         <div class="card">
                             <div class="card-label">✓ Análise +</div>
-                            <div class="card-value" style="color: #82a002;">${data.analisePositiva}</div>
+                            <div class="card-value">${data.analisePositiva}</div>
                         </div>
 
                         <!-- Ligações Realizadas -->
                         <div class="card">
                             <div class="card-label">📞 Ligações</div>
-                            <div class="card-value" style="color: #98a83f;">${data.ligacoesRealizadas}</div>
+                            <div class="card-value">${data.ligacoesRealizadas}</div>
                         </div>
 
                         <!-- Taxa de Conversão -->
                         <div class="card">
                             <div class="card-label">% Conversão</div>
-                            <div class="card-value" style="color: #b5d909;">${taxaConversao}%</div>
+                            <div class="card-value">${taxaConversao}%</div>
                         </div>
 
                         <!-- Ligações Atendidas -->
                         <div class="card">
                             <div class="card-label">✓ Atendidas</div>
-                            <div class="card-value" style="color: #a4ce3a; font-size: 2.5rem;">${data.ligacoesAtendidas}</div>
+                            <div class="card-value" style="font-size: 2.5rem;">${data.ligacoesAtendidas}</div>
                         </div>
 
                         <!-- Formulário Respondido -->
                         <div class="card">
                             <div class="card-label">📋 Formulário</div>
-                            <div class="card-value" style="color: #b5d909; font-size: 2.5rem;">${data.formularioRespondido}</div>
+                            <div class="card-value" style="font-size: 2.5rem;">${data.formularioRespondido}</div>
                         </div>
                     </div>
 
@@ -443,7 +445,7 @@
                                         </div>
                                         <div style="display: flex; align-items: center; gap: 16px;">
                                             <span class="funil-taxa">${taxa}</span>
-                                            <span class="funil-value" style="color: ${item.cor};">${item.valor}</span>
+                                            <span class="funil-value">${item.valor}</span>
                                         </div>
                                     </div>
                                 `;
@@ -470,25 +472,25 @@
                         <!-- Investimento -->
                         <div class="card">
                             <div class="card-label">💰 Investimento</div>
-                            <div class="card-value" style="color: #d3f328; font-size: 2rem;">R$ ${(data.investimento/1000).toFixed(0)}k</div>
+                            <div class="card-value" style="font-size: 2rem;">R$ ${(data.investimento/1000).toFixed(0)}k</div>
                         </div>
 
                         <!-- Cadastros -->
                         <div class="card">
                             <div class="card-label">📝 Cadastros</div>
-                            <div class="card-value" style="color: #b5d909; font-size: 2.5rem;">${data.cadastros}</div>
+                            <div class="card-value" style="font-size: 2.5rem;">${data.cadastros}</div>
                         </div>
 
                         <!-- MQLs -->
                         <div class="card">
                             <div class="card-label">🎯 MQLs</div>
-                            <div class="card-value" style="color: #82a002; font-size: 2.5rem;">${data.mqls}</div>
+                            <div class="card-value" style="font-size: 2.5rem;">${data.mqls}</div>
                         </div>
 
                         <!-- Vendas Marketing -->
                         <div class="card">
                             <div class="card-label">✓ Vendas</div>
-                            <div class="card-value" style="color: #46580f; font-size: 2.5rem;">${data.vendasMarketing}</div>
+                            <div class="card-value" style="font-size: 2.5rem;">${data.vendasMarketing}</div>
                         </div>
                     </div>
 
@@ -505,7 +507,7 @@
                                         <div class="funil-label" style="font-size: 0.9rem;">${item.label}</div>
                                         <div style="display: flex; align-items: center; gap: 12px;">
                                             <span class="funil-taxa" style="font-size: 0.8rem;">${taxa}</span>
-                                            <span class="funil-value" style="color: ${item.cor}; font-size: 1.5rem;">${item.valor}</span>
+                                            <span class="funil-value" style="font-size: 1.5rem;">${item.valor}</span>
                                         </div>
                                     </div>
                                 `;
@@ -525,7 +527,7 @@
                                     <div>
                                         <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
                                             <span style="color: #43474e; font-size: 0.75rem; font-weight: 600;">${item.label}</span>
-                                            <span style="color: ${item.cor}; font-size: 0.9rem; font-weight: bold;">${item.valor}</span>
+                                            <span style="color: #ffffff; font-size: 0.9rem; font-weight: bold;">${item.valor}</span>
                                         </div>
                                         <div class="progress-wrapper">
                                             <div class="progress-fill" style="width: ${percentual}%; background-color: ${item.cor};"></div>
@@ -550,7 +552,7 @@
                     <!-- LINHA 1: Receita Total (destaque) -->
                     <div class="card" style="padding: 24px; text-align: center; border-left: 4px solid #e5fc5a;">
                         <div class="card-label">💰 RECEITA TOTAL</div>
-                        <div style="font-size: 3.5rem; font-weight: bold; color: #82a002; text-shadow: 0 0 20px rgba(130, 160, 2, 0.3);">
+                        <div style="font-size: 3.5rem; font-weight: bold; color: #ffffff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);">
                             R$ ${(data.receitaTotal/1000).toFixed(0)}k
                         </div>
                     </div>
@@ -560,25 +562,25 @@
                         <!-- Receita PIN -->
                         <div class="card" style="border-left: 4px solid #b5d909;">
                             <div class="card-label">Receita PIN</div>
-                            <div class="card-value" style="color: #b5d909; font-size: 2rem;">R$ ${(data.receitaPIN/1000).toFixed(0)}k</div>
+                            <div class="card-value" style="font-size: 2rem;">R$ ${(data.receitaPIN/1000).toFixed(0)}k</div>
                         </div>
 
                         <!-- Receita Monitoramento -->
                         <div class="card" style="border-left: 4px solid #98a83f;">
                             <div class="card-label">Rec. Monitor.</div>
-                            <div class="card-value" style="color: #98a83f; font-size: 2rem;">R$ ${(data.receitaMonitoramento/1000).toFixed(0)}k</div>
+                            <div class="card-value" style="font-size: 2rem;">R$ ${(data.receitaMonitoramento/1000).toFixed(0)}k</div>
                         </div>
 
                         <!-- CAC -->
                         <div class="card" style="border-left: 4px solid #d3f328;">
                             <div class="card-label">CAC</div>
-                            <div class="card-value" style="color: #d3f328; font-size: 2rem;">R$ ${data.cac.toFixed(0)}</div>
+                            <div class="card-value" style="font-size: 2rem;">R$ ${data.cac.toFixed(0)}</div>
                         </div>
 
                         <!-- ROI -->
                         <div class="card" style="border-left: 4px solid #46580f;">
                             <div class="card-label">ROI</div>
-                            <div class="card-value" style="color: #46580f; font-size: 2rem;">${data.roi.toFixed(2)}</div>
+                            <div class="card-value" style="font-size: 2rem;">${data.roi.toFixed(2)}</div>
                         </div>
                     </div>
 
@@ -587,25 +589,25 @@
                         <!-- Qtd Vendas PIN -->
                         <div class="card" style="border-left: 4px solid #a4ce3a;">
                             <div class="card-label">Vendas PIN</div>
-                            <div class="card-value" style="color: #a4ce3a; font-size: 2.5rem;">${data.qtdVendasPin}</div>
+                            <div class="card-value" style="font-size: 2.5rem;">${data.qtdVendasPin}</div>
                         </div>
 
                         <!-- Qtd Vendas Monitoramento -->
                         <div class="card" style="border-left: 4px solid #98a83f;">
                             <div class="card-label">Vendas Monitor.</div>
-                            <div class="card-value" style="color: #98a83f; font-size: 2.5rem;">${data.qtdVendasMonitoramento}</div>
+                            <div class="card-value" style="font-size: 2.5rem;">${data.qtdVendasMonitoramento}</div>
                         </div>
 
                         <!-- Qtd Vendas Inbound -->
                         <div class="card" style="border-left: 4px solid #82a002;">
                             <div class="card-label">Vendas Inbound</div>
-                            <div class="card-value" style="color: #82a002; font-size: 2.5rem;">${data.qtdVendasInbound}</div>
+                            <div class="card-value" style="font-size: 2.5rem;">${data.qtdVendasInbound}</div>
                         </div>
 
                         <!-- Qtd Vendas Outbound -->
                         <div class="card" style="border-left: 4px solid #46580f;">
                             <div class="card-label">Vendas Outbound</div>
-                            <div class="card-value" style="color: #46580f; font-size: 2.5rem;">${data.qtdVendasOutbound}</div>
+                            <div class="card-value" style="font-size: 2.5rem;">${data.qtdVendasOutbound}</div>
                         </div>
                     </div>
 
@@ -614,13 +616,13 @@
                         <!-- Ticket Médio -->
                         <div class="card" style="border-left: 4px solid #46580f; padding: 28px;">
                             <div class="card-label">💳 TICKET MÉDIO</div>
-                            <div class="card-value" style="color: #46580f; font-size: 2.5rem;">R$ ${(data.ticketMedio/1000).toFixed(1)}k</div>
+                            <div class="card-value" style="font-size: 2.5rem;">R$ ${(data.ticketMedio/1000).toFixed(1)}k</div>
                         </div>
 
                         <!-- Ciclo de Vendas -->
                         <div class="card" style="border-left: 4px solid #253102; padding: 28px;">
                             <div class="card-label">⏱️ CICLO DE VENDAS</div>
-                            <div class="card-value" style="color: #253102; font-size: 2.5rem;">${data.cicloVendas} <span style="font-size: 1.5rem;">dias</span></div>
+                            <div class="card-value" style="font-size: 2.5rem;">${data.cicloVendas} <span style="font-size: 1.5rem;">dias</span></div>
                         </div>
                     </div>
                 </div>
