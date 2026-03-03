@@ -75,6 +75,10 @@ function doGet(e) {
         cadastros: getNumericValue(sheet, col + '5'),
         mqls: getNumericValue(sheet, col + '6'),
 
+        // ===== DADOS PARA PÁGINA RESUMO =====
+        oportunidades1: getNumericValue(sheet, col + '6'),         // Linha 6
+        oportunidades2: getNumericValue(sheet, col + '7'),         // Linha 7
+
         // ===== DADOS DE COMERCIAL & VENDAS =====
         ligacoesRealizadas: getNumericValue(sheet, col + '8'),
         ligacoesAtendidas: getNumericValue(sheet, col + '9'),
@@ -83,10 +87,12 @@ function doGet(e) {
         // Linha 11: Formulário Respondido (usado em ambos)
         formularioRespondido: getNumericValue(sheet, col + '11'),
         respostaFormulario: getNumericValue(sheet, col + '11'), // mesmo valor
+        analises: getNumericValue(sheet, col + '11'),           // Linha 11 (Resumo)
 
         // Linha 12: Análise Positiva (usado em ambos)
         analisePositiva: getNumericValue(sheet, col + '12'),
         analisePositivaMarketing: getNumericValue(sheet, col + '12'), // mesmo valor
+        analisesPositivas: getNumericValue(sheet, col + '12'),  // Linha 12 (Resumo)
 
         // ===== DADOS EXCLUSIVOS DE MARKETING =====
         pitchsAgendados: getNumericValue(sheet, col + '14'),
@@ -95,6 +101,7 @@ function doGet(e) {
         // ===== VENDAS (usado em ambos) =====
         vendas: getNumericValue(sheet, col + '16'),
         vendasMarketing: getNumericValue(sheet, col + '16'), // mesmo valor
+        vendasTotal: getNumericValue(sheet, col + '16'),     // Linha 16 (Resumo)
 
         // ===== QUANTIDADE DE VENDAS POR TIPO =====
         qtdVendasPin: getNumericValue(sheet, col + '17'),
