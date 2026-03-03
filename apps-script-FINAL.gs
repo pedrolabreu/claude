@@ -22,9 +22,8 @@ function doGet(e) {
     // Usar ID da planilha ao invés de getActiveSpreadsheet()
     const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
 
-    // IMPORTANTE: Verificar o nome EXATO da aba
-    // Pode ser: "Dashboard - Performance", "RESUMO_DADOS", "Resumo de Dados", etc.
-    const sheet = spreadsheet.getSheetByName('Dashboard - Performance');
+    // Nome CORRETO da aba confirmado pelo usuário
+    const sheet = spreadsheet.getSheetByName('RESUMO_DADOS');
 
     if (!sheet) {
       return ContentService.createTextOutput(JSON.stringify({
