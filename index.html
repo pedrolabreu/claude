@@ -340,7 +340,15 @@
                 qtdVendasPin: 0, qtdVendasMonitoramento: 0,
                 qtdVendasInbound: 0, qtdVendasOutbound: 0,
                 receitaTotal: 0, receitaPIN: 0, receitaMonitoramento: 0,
-                roi: 0, cac: 0, ticketMedio: 0, cicloVendas: 0
+                roi: 0, cac: 0, ticketMedio: 0, cicloVendas: 0,
+                // Novos campos para página Resumo (mapeamento direto das linhas)
+                vendasTotal: 0,           // Linha 16
+                oportunidades1: 0,        // Linha 6
+                oportunidades2: 0,        // Linha 7
+                analises: 0,              // Linha 11
+                analisesPositivas: 0,     // Linha 12
+                ticketMedioPIN: 0,        // Linha 24
+                ticketMedioMonit: 0       // Linha 35
             };
 
             const sheetMonthData = sheetData?.[selectedMonth] || {};
@@ -381,17 +389,17 @@
         function renderResumoPage() {
             const data = getCurrentMonthData();
 
-            // Métricas agregadas
-            const totalVendas = data.vendas + data.vendasMarketing;
-            const oportunidades = data.mqls;
-            const analises = data.formularioRespondido + data.respostaFormulario;
-            const analisesPositivas = data.analisePositiva + data.analisePositivaMarketing;
-            const reunioesAgendadas = data.pitchsAgendados;
-            const reunioesFeitas = data.pitchsRealizados;
+            // Métricas agregadas (mapeamento direto das linhas do Google Sheets)
+            const totalVendas = data.vendasTotal;                      // Linha 16
+            const oportunidades = data.oportunidades1 + data.oportunidades2; // Linha 6 + Linha 7
+            const analises = data.analises;                            // Linha 11
+            const analisesPositivas = data.analisesPositivas;          // Linha 12
+            const reunioesAgendadas = data.pitchsAgendados;            // Linha 14
+            const reunioesFeitas = data.pitchsRealizados;              // Linha 15
 
-            // Ticket médio PIN e Monitoramento
-            const ticketMedioPIN = data.qtdVendasPin > 0 ? (data.receitaPIN / data.qtdVendasPin) : 0;
-            const ticketMedioMonit = data.qtdVendasMonitoramento > 0 ? (data.receitaMonitoramento / data.qtdVendasMonitoramento) : 0;
+            // Ticket médio PIN e Monitoramento (direto da planilha)
+            const ticketMedioPIN = data.ticketMedioPIN;                // Linha 24
+            const ticketMedioMonit = data.ticketMedioMonit;            // Linha 35
 
             return `
                 <div style="display: flex; flex-direction: column; gap: 20px; height: calc(100vh - 110px);">
@@ -441,7 +449,7 @@
                                 </div>
                                 <div style="text-align: center; padding: 16px; background: rgba(26, 45, 20, 0.5); border-radius: 8px; border-left: 3px solid #98a83f;">
                                     <div class="card-label" style="font-size: 0.75rem;">Ticket Médio</div>
-                                    <div class="card-value" style="font-size: 1.8rem;">R$ ${(ticketMedioPIN/1000).toFixed(1)}k</div>
+                                    <div class="card-value" style="font-size: 1.8rem;">R$ ${ticketMedioPIN > 1000 ? (ticketMedioPIN/1000).toFixed(1) + 'k' : ticketMedioPIN.toFixed(0)}</div>
                                 </div>
                             </div>
                         </div>
@@ -498,7 +506,7 @@
                                 </div>
                                 <div style="text-align: center; padding: 16px; background: rgba(26, 45, 20, 0.5); border-radius: 8px; border-left: 3px solid #98a83f;">
                                     <div class="card-label" style="font-size: 0.75rem;">Ticket Médio</div>
-                                    <div class="card-value" style="font-size: 1.8rem;">R$ ${(ticketMedioMonit/1000).toFixed(1)}k</div>
+                                    <div class="card-value" style="font-size: 1.8rem;">R$ ${ticketMedioMonit > 1000 ? (ticketMedioMonit/1000).toFixed(1) + 'k' : ticketMedioMonit.toFixed(0)}</div>
                                 </div>
                             </div>
                         </div>
