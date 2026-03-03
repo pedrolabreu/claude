@@ -322,6 +322,21 @@
                 clearTimeout(timeoutId);
                 sheetData = await response.json();
                 lastUpdate = new Date();
+
+                // DIAGNÓSTICO: Log da estrutura de dados recebida
+                console.log('✅ Dados recebidos do Google Sheets');
+                if (sheetData && Object.keys(sheetData).length > 0) {
+                    const firstMonth = Object.keys(sheetData)[0];
+                    console.log('Estrutura do primeiro mês:', Object.keys(sheetData[firstMonth]));
+
+                    // Detectar versão do Google Apps Script
+                    if (sheetData[firstMonth].vendas !== undefined && sheetData[firstMonth].vendasTotal === undefined) {
+                        console.warn('⚠ Versão antiga detectada - usando fallback de compatibilidade');
+                        console.warn('Atualize o Google Apps Script: docs/ATUALIZAR_GOOGLE_APPS_SCRIPT.md');
+                    } else if (sheetData[firstMonth].vendasTotal !== undefined) {
+                        console.log('✅ Versão correta detectada');
+                    }
+                }
             } catch (error) {
                 console.error('Erro ao carregar dados:', error);
                 loadError = true;
@@ -352,6 +367,25 @@
             };
 
             const sheetMonthData = sheetData?.[selectedMonth] || {};
+
+            // VALIDAÇÃO: Detectar formato antigo do Google Apps Script e mapear automaticamente
+            if (sheetMonthData.vendas !== undefined && sheetMonthData.vendasTotal === undefined) {
+                console.warn('⚠ Google Apps Script está usando formato ANTIGO - mapeando automaticamente');
+                console.warn('Por favor, atualize o Google Apps Script com a versão de apps-script.gs');
+
+                // Mapear formato antigo → novo
+                const mapped = {
+                    ...sheetMonthData,
+                    vendasTotal: sheetMonthData.vendas || 0,
+                    oportunidades1: sheetMonthData.mqls || 0,
+                    oportunidades2: 0,
+                    analises: sheetMonthData.formularioRespondido || 0,
+                    analisesPositivas: sheetMonthData.analisePositiva || 0
+                };
+
+                return { ...defaultData, ...mapped };
+            }
+
             return { ...defaultData, ...sheetMonthData };
         }
 

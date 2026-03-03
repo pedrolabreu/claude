@@ -90,6 +90,26 @@ Os dados são extraídos automaticamente da planilha Google Sheets através do G
 2. Os dados são atualizados automaticamente no dashboard
 3. Atualização manual: Clique no botão "🔄 Atualizar"
 
+## ⚠️ Troubleshooting
+
+### Dados aparecem zerados no dashboard?
+
+Se os campos **Vendas Total**, **Oportunidades**, **Análises** ou **Análises +** mostram zero:
+
+1. **Abra o console do navegador** (F12)
+2. Procure por mensagens:
+   - ✅ "✅ Versão correta detectada" → Tudo OK!
+   - ⚠️ "⚠ Versão antiga detectada" → Precisa atualizar o Google Apps Script
+
+3. **Se aparecer "versão antiga":**
+   - Siga o guia completo: [`docs/ATUALIZAR_GOOGLE_APPS_SCRIPT.md`](docs/ATUALIZAR_GOOGLE_APPS_SCRIPT.md)
+   - Use o arquivo **`apps-script.gs`** (raiz do repositório)
+   - ❌ **NÃO use** `docs/GoogleAppsScript-PRONTO.js` (versão antiga!)
+
+### Como funciona o fallback automático?
+
+O dashboard detecta automaticamente se o Google Apps Script está usando a versão antiga e faz o mapeamento correto dos dados. Porém, é recomendado atualizar para a versão correta seguindo o guia acima.
+
 ## 📖 Documentação Completa
 
 Veja os guias em `docs/`:
