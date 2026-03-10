@@ -268,6 +268,36 @@
             box-shadow: 0 0 8px currentColor;
             transition: width 1s ease;
         }
+
+        /* TABELA DE SDRs */
+        .sdr-table tbody .sdr-row {
+            transition: all 0.3s ease;
+        }
+
+        .sdr-table tbody .sdr-row:hover {
+            background: rgba(130, 160, 2, 0.15);
+            transform: translateX(3px);
+        }
+
+        /* RESPONSIVIDADE PARA TELAS PEQUENAS */
+        @media (max-width: 1200px) {
+            .sdr-table {
+                font-size: 0.85rem;
+            }
+
+            .sdr-table th,
+            .sdr-table td {
+                padding: 12px !important;
+            }
+
+            .sdr-table td[style*="font-size: 1.8rem"] {
+                font-size: 1.4rem !important;
+            }
+
+            .sdr-table td[style*="font-size: 2rem"] {
+                font-size: 1.6rem !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -389,6 +419,31 @@
             return { ...defaultData, ...sheetMonthData };
         }
 
+        // FUNÇÃO: Obter dados dos SDRs do mês atual
+        function getSDRData() {
+            const data = getCurrentMonthData();
+
+            // Dados mockados temporários (Fase 1 - será substituído por dados reais da planilha)
+            const defaultSDRs = [
+                { nome: 'Maisa', analises: 45, analisesPositivas: 32, vendas: 8 },
+                { nome: 'Gabriela', analises: 52, analisesPositivas: 38, vendas: 12 },
+                { nome: 'Juliana', analises: 38, analisesPositivas: 28, vendas: 6 },
+                { nome: 'Marlon', analises: 41, analisesPositivas: 30, vendas: 9 }
+            ];
+
+            // Se dados reais existirem (após Fase 2), usar; senão usar mockados
+            if (data.sdrs) {
+                return [
+                    { nome: 'Maisa', ...data.sdrs.maisa },
+                    { nome: 'Gabriela', ...data.sdrs.gabriela },
+                    { nome: 'Juliana', ...data.sdrs.juliana },
+                    { nome: 'Marlon', ...data.sdrs.marlon }
+                ];
+            }
+
+            return defaultSDRs;
+        }
+
         function getFunilData() {
             const data = getCurrentMonthData();
             return [
@@ -436,7 +491,7 @@
             const ticketMedioMonit = data.ticketMedioMonit;            // Linha 35
 
             return `
-                <div style="display: flex; flex-direction: column; gap: 20px; height: calc(100vh - 110px);">
+                <div style="display: flex; flex-direction: column; gap: 20px; height: calc(100vh - 110px); overflow-y: auto; padding-right: 10px;">
                     <!-- LINHA 1: KPIs Principais (6 cards) -->
                     <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;">
                         <div class="card" style="border-left: 4px solid #82a002; padding: 16px;">
@@ -543,6 +598,73 @@
                                     <div class="card-value" style="font-size: 1.8rem;">R$ ${ticketMedioMonit > 1000 ? (ticketMedioMonit/1000).toFixed(1) + 'k' : ticketMedioMonit.toFixed(0)}</div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- LINHA 3: Tabela de SDRs -->
+                    <div class="card" style="padding: 24px; margin-top: 20px;">
+                        <h3 style="font-size: 1.3rem; color: #b5d909; margin-bottom: 20px; text-align: center; font-weight: bold;">
+                            DESEMPENHO POR SDR
+                        </h3>
+
+                        <div style="overflow-x: auto;">
+                            <table class="sdr-table" style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="border-bottom: 2px solid rgba(130, 160, 2, 0.5);">
+                                        <th style="padding: 16px; text-align: left; font-size: 0.9rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                                            SDR
+                                        </th>
+                                        <th style="padding: 16px; text-align: center; font-size: 0.9rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                                            Análises
+                                        </th>
+                                        <th style="padding: 16px; text-align: center; font-size: 0.9rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                                            Análises Positivas
+                                        </th>
+                                        <th style="padding: 16px; text-align: center; font-size: 0.9rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                                            Vendas
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${getSDRData().map((sdr, index) => {
+                                        const cores = ['#82a002', '#b5d909', '#98a83f', '#a4ce3a'];
+                                        const cor = cores[index % cores.length];
+
+                                        return `
+                                            <tr class="sdr-row" style="border-bottom: 1px solid rgba(130, 160, 2, 0.2);">
+                                                <td style="padding: 20px; font-size: 1.1rem; color: #ffffff; font-weight: 600; border-left: 4px solid ${cor};">
+                                                    ${sdr.nome}
+                                                </td>
+                                                <td style="padding: 20px; text-align: center; font-size: 1.8rem; color: #b5d909; font-weight: bold;">
+                                                    ${sdr.analises}
+                                                </td>
+                                                <td style="padding: 20px; text-align: center; font-size: 1.8rem; color: #82a002; font-weight: bold;">
+                                                    ${sdr.analisesPositivas}
+                                                </td>
+                                                <td style="padding: 20px; text-align: center; font-size: 1.8rem; color: #e5fc5a; font-weight: bold;">
+                                                    ${sdr.vendas}
+                                                </td>
+                                            </tr>
+                                        `;
+                                    }).join('')}
+
+                                    <!-- LINHA TOTAL -->
+                                    <tr style="background: rgba(130, 160, 2, 0.15); border-top: 2px solid rgba(130, 160, 2, 0.5);">
+                                        <td style="padding: 20px; font-size: 1.2rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase;">
+                                            TOTAL
+                                        </td>
+                                        <td style="padding: 20px; text-align: center; font-size: 2rem; color: #b5d909; font-weight: bold;">
+                                            ${getSDRData().reduce((sum, sdr) => sum + sdr.analises, 0)}
+                                        </td>
+                                        <td style="padding: 20px; text-align: center; font-size: 2rem; color: #82a002; font-weight: bold;">
+                                            ${getSDRData().reduce((sum, sdr) => sum + sdr.analisesPositivas, 0)}
+                                        </td>
+                                        <td style="padding: 20px; text-align: center; font-size: 2rem; color: #e5fc5a; font-weight: bold;">
+                                            ${getSDRData().reduce((sum, sdr) => sum + sdr.vendas, 0)}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
