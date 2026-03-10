@@ -282,20 +282,20 @@
         /* RESPONSIVIDADE PARA TELAS PEQUENAS */
         @media (max-width: 1200px) {
             .sdr-table {
-                font-size: 0.85rem;
+                font-size: 0.75rem;
             }
 
             .sdr-table th,
             .sdr-table td {
-                padding: 12px !important;
+                padding: 6px 8px !important;
             }
 
-            .sdr-table td[style*="font-size: 1.8rem"] {
-                font-size: 1.4rem !important;
+            .sdr-table td[style*="font-size: 1.3rem"] {
+                font-size: 1.1rem !important;
             }
 
-            .sdr-table td[style*="font-size: 2rem"] {
-                font-size: 1.6rem !important;
+            .sdr-table td[style*="font-size: 1.4rem"] {
+                font-size: 1.2rem !important;
             }
         }
     </style>
@@ -491,64 +491,64 @@
             const ticketMedioMonit = data.ticketMedioMonit;            // Linha 35
 
             return `
-                <div style="display: flex; flex-direction: column; gap: 20px; height: calc(100vh - 110px); overflow-y: auto; padding-right: 10px;">
+                <div style="display: flex; flex-direction: column; gap: 10px; height: calc(100vh - 110px);">
                     <!-- LINHA 1: KPIs Principais (6 cards) -->
-                    <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;">
-                        <div class="card" style="border-left: 4px solid #82a002; padding: 16px;">
-                            <div class="card-label" style="font-size: 0.7rem;">Vendas Total</div>
-                            <div class="card-value" style="font-size: 2.2rem;">${totalVendas}</div>
+                    <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
+                        <div class="card" style="border-left: 4px solid #82a002; padding: 8px;">
+                            <div class="card-label" style="font-size: 0.65rem;">Vendas Total</div>
+                            <div class="card-value" style="font-size: 1.6rem;">${totalVendas}</div>
                         </div>
-                        <div class="card" style="border-left: 4px solid #a4ce3a; padding: 16px;">
-                            <div class="card-label" style="font-size: 0.7rem;">Oportunidades</div>
-                            <div class="card-value" style="font-size: 2.2rem;">${oportunidades}</div>
+                        <div class="card" style="border-left: 4px solid #a4ce3a; padding: 8px;">
+                            <div class="card-label" style="font-size: 0.65rem;">Oportunidades</div>
+                            <div class="card-value" style="font-size: 1.6rem;">${oportunidades}</div>
                         </div>
-                        <div class="card" style="border-left: 4px solid #b5d909; padding: 16px;">
-                            <div class="card-label" style="font-size: 0.7rem;">Análises</div>
-                            <div class="card-value" style="font-size: 2.2rem;">${analises}</div>
+                        <div class="card" style="border-left: 4px solid #b5d909; padding: 8px;">
+                            <div class="card-label" style="font-size: 0.65rem;">Análises</div>
+                            <div class="card-value" style="font-size: 1.6rem;">${analises}</div>
                         </div>
-                        <div class="card" style="border-left: 4px solid #98a83f; padding: 16px;">
-                            <div class="card-label" style="font-size: 0.7rem;">Análises +</div>
-                            <div class="card-value" style="font-size: 2.2rem;">${analisesPositivas}</div>
+                        <div class="card" style="border-left: 4px solid #98a83f; padding: 8px;">
+                            <div class="card-label" style="font-size: 0.65rem;">Análises +</div>
+                            <div class="card-value" style="font-size: 1.6rem;">${analisesPositivas}</div>
                         </div>
-                        <div class="card" style="border-left: 4px solid #46580f; padding: 16px;">
-                            <div class="card-label" style="font-size: 0.7rem;">Reuniões Agend.</div>
-                            <div class="card-value" style="font-size: 2.2rem;">${reunioesAgendadas}</div>
+                        <div class="card" style="border-left: 4px solid #46580f; padding: 8px;">
+                            <div class="card-label" style="font-size: 0.65rem;">Reuniões Agend.</div>
+                            <div class="card-value" style="font-size: 1.6rem;">${reunioesAgendadas}</div>
                         </div>
-                        <div class="card" style="border-left: 4px solid #253102; padding: 16px;">
-                            <div class="card-label" style="font-size: 0.7rem;">Reuniões Feitas</div>
-                            <div class="card-value" style="font-size: 2.2rem;">${reunioesFeitas}</div>
+                        <div class="card" style="border-left: 4px solid #253102; padding: 8px;">
+                            <div class="card-label" style="font-size: 0.65rem;">Reuniões Feitas</div>
+                            <div class="card-value" style="font-size: 1.6rem;">${reunioesFeitas}</div>
                         </div>
                     </div>
 
                     <!-- LINHA 2: Grid com 3 colunas - PIN, FUNIL, MONITORAMENTO -->
-                    <div style="display: grid; grid-template-columns: 25% 50% 25%; gap: 20px; flex: 1;">
+                    <div style="display: grid; grid-template-columns: 25% 50% 25%; gap: 10px; flex: 1; min-height: 0;">
                         <!-- COLUNA ESQUERDA: Vendas PIN -->
-                        <div class="card" style="padding: 20px; display: flex; flex-direction: column;">
-                            <h3 style="font-size: 1.1rem; color: #b5d909; margin-bottom: 20px; text-align: center; font-weight: bold;">
+                        <div class="card" style="padding: 12px; display: flex; flex-direction: column;">
+                            <h3 style="font-size: 0.9rem; color: #b5d909; margin-bottom: 10px; text-align: center; font-weight: bold;">
                                 VENDAS PIN
                             </h3>
-                            <div style="display: flex; flex-direction: column; gap: 16px; flex: 1; justify-content: center;">
-                                <div style="text-align: center; padding: 16px; background: rgba(26, 45, 20, 0.5); border-radius: 8px; border-left: 3px solid #82a002;">
-                                    <div class="card-label" style="font-size: 0.75rem;">Quantidade</div>
-                                    <div class="card-value" style="font-size: 2.5rem;">${data.qtdVendasPin}</div>
+                            <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; justify-content: center;">
+                                <div style="text-align: center; padding: 10px; background: rgba(26, 45, 20, 0.5); border-radius: 6px; border-left: 3px solid #82a002;">
+                                    <div class="card-label" style="font-size: 0.65rem;">Quantidade</div>
+                                    <div class="card-value" style="font-size: 1.8rem;">${data.qtdVendasPin}</div>
                                 </div>
-                                <div style="text-align: center; padding: 16px; background: rgba(26, 45, 20, 0.5); border-radius: 8px; border-left: 3px solid #b5d909;">
-                                    <div class="card-label" style="font-size: 0.75rem;">Faturamento</div>
-                                    <div class="card-value" style="font-size: 2rem;">R$ ${(data.receitaPIN/1000).toFixed(0)}k</div>
+                                <div style="text-align: center; padding: 10px; background: rgba(26, 45, 20, 0.5); border-radius: 6px; border-left: 3px solid #b5d909;">
+                                    <div class="card-label" style="font-size: 0.65rem;">Faturamento</div>
+                                    <div class="card-value" style="font-size: 1.5rem;">R$ ${(data.receitaPIN/1000).toFixed(0)}k</div>
                                 </div>
-                                <div style="text-align: center; padding: 16px; background: rgba(26, 45, 20, 0.5); border-radius: 8px; border-left: 3px solid #98a83f;">
-                                    <div class="card-label" style="font-size: 0.75rem;">Ticket Médio</div>
-                                    <div class="card-value" style="font-size: 1.8rem;">R$ ${ticketMedioPIN > 1000 ? (ticketMedioPIN/1000).toFixed(1) + 'k' : ticketMedioPIN.toFixed(0)}</div>
+                                <div style="text-align: center; padding: 10px; background: rgba(26, 45, 20, 0.5); border-radius: 6px; border-left: 3px solid #98a83f;">
+                                    <div class="card-label" style="font-size: 0.65rem;">Ticket Médio</div>
+                                    <div class="card-value" style="font-size: 1.3rem;">R$ ${ticketMedioPIN > 1000 ? (ticketMedioPIN/1000).toFixed(1) + 'k' : ticketMedioPIN.toFixed(0)}</div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- COLUNA CENTRAL: Funil Completo -->
-                        <div class="card" style="padding: 20px; overflow-y: auto;">
-                            <h3 style="font-size: 1.3rem; color: #b5d909; margin-bottom: 16px; text-align: center; font-weight: bold;">
+                        <div class="card" style="padding: 12px; overflow-y: auto;">
+                            <h3 style="font-size: 1rem; color: #b5d909; margin-bottom: 8px; text-align: center; font-weight: bold;">
                                 FUNIL COMPLETO
                             </h3>
-                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
                                 ${[
                                     { label: 'Visitantes Site', valor: data.visitantes, cor: '#d3f328' },
                                     { label: 'Leads Totais', valor: data.cadastros, cor: '#b5d909' },
@@ -562,16 +562,16 @@
                                     const taxa = idx > 0 ? calcularTaxa(item.valor, arr[idx - 1].valor) : '100%';
                                     const percentual = data.visitantes > 0 ? (item.valor / data.visitantes * 100) : 0;
                                     return `
-                                        <div class="funil-bar" style="border-left-color: ${item.cor}; padding: 10px 16px;">
+                                        <div class="funil-bar" style="border-left-color: ${item.cor}; padding: 6px 10px;">
                                             <div>
-                                                <div class="funil-label" style="font-size: 0.9rem;">${item.label}</div>
-                                                <div class="progress-wrapper" style="width: 200px; margin-top: 4px;">
+                                                <div class="funil-label" style="font-size: 0.75rem;">${item.label}</div>
+                                                <div class="progress-wrapper" style="width: 150px; margin-top: 3px; height: 6px;">
                                                     <div class="progress-fill" style="width: ${percentual}%; background-color: ${item.cor};"></div>
                                                 </div>
                                             </div>
-                                            <div style="display: flex; align-items: center; gap: 12px;">
-                                                <span class="funil-taxa" style="font-size: 0.75rem;">${taxa}</span>
-                                                <span class="funil-value" style="font-size: 1.5rem;">${item.valor}</span>
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <span class="funil-taxa" style="font-size: 0.65rem;">${taxa}</span>
+                                                <span class="funil-value" style="font-size: 1.2rem;">${item.valor}</span>
                                             </div>
                                         </div>
                                     `;
@@ -580,47 +580,47 @@
                         </div>
 
                         <!-- COLUNA DIREITA: Vendas Monitoramento -->
-                        <div class="card" style="padding: 20px; display: flex; flex-direction: column;">
-                            <h3 style="font-size: 1.1rem; color: #b5d909; margin-bottom: 20px; text-align: center; font-weight: bold;">
+                        <div class="card" style="padding: 12px; display: flex; flex-direction: column;">
+                            <h3 style="font-size: 0.9rem; color: #b5d909; margin-bottom: 10px; text-align: center; font-weight: bold;">
                                 VENDAS MONITOR.
                             </h3>
-                            <div style="display: flex; flex-direction: column; gap: 16px; flex: 1; justify-content: center;">
-                                <div style="text-align: center; padding: 16px; background: rgba(26, 45, 20, 0.5); border-radius: 8px; border-left: 3px solid #82a002;">
-                                    <div class="card-label" style="font-size: 0.75rem;">Quantidade</div>
-                                    <div class="card-value" style="font-size: 2.5rem;">${data.qtdVendasMonitoramento}</div>
+                            <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; justify-content: center;">
+                                <div style="text-align: center; padding: 10px; background: rgba(26, 45, 20, 0.5); border-radius: 6px; border-left: 3px solid #82a002;">
+                                    <div class="card-label" style="font-size: 0.65rem;">Quantidade</div>
+                                    <div class="card-value" style="font-size: 1.8rem;">${data.qtdVendasMonitoramento}</div>
                                 </div>
-                                <div style="text-align: center; padding: 16px; background: rgba(26, 45, 20, 0.5); border-radius: 8px; border-left: 3px solid #b5d909;">
-                                    <div class="card-label" style="font-size: 0.75rem;">Faturamento</div>
-                                    <div class="card-value" style="font-size: 2rem;">R$ ${(data.receitaMonitoramento/1000).toFixed(0)}k</div>
+                                <div style="text-align: center; padding: 10px; background: rgba(26, 45, 20, 0.5); border-radius: 6px; border-left: 3px solid #b5d909;">
+                                    <div class="card-label" style="font-size: 0.65rem;">Faturamento</div>
+                                    <div class="card-value" style="font-size: 1.5rem;">R$ ${(data.receitaMonitoramento/1000).toFixed(0)}k</div>
                                 </div>
-                                <div style="text-align: center; padding: 16px; background: rgba(26, 45, 20, 0.5); border-radius: 8px; border-left: 3px solid #98a83f;">
-                                    <div class="card-label" style="font-size: 0.75rem;">Ticket Médio</div>
-                                    <div class="card-value" style="font-size: 1.8rem;">R$ ${ticketMedioMonit > 1000 ? (ticketMedioMonit/1000).toFixed(1) + 'k' : ticketMedioMonit.toFixed(0)}</div>
+                                <div style="text-align: center; padding: 10px; background: rgba(26, 45, 20, 0.5); border-radius: 6px; border-left: 3px solid #98a83f;">
+                                    <div class="card-label" style="font-size: 0.65rem;">Ticket Médio</div>
+                                    <div class="card-value" style="font-size: 1.3rem;">R$ ${ticketMedioMonit > 1000 ? (ticketMedioMonit/1000).toFixed(1) + 'k' : ticketMedioMonit.toFixed(0)}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- LINHA 3: Tabela de SDRs -->
-                    <div class="card" style="padding: 24px; margin-top: 20px;">
-                        <h3 style="font-size: 1.3rem; color: #b5d909; margin-bottom: 20px; text-align: center; font-weight: bold;">
+                    <div class="card" style="padding: 10px;">
+                        <h3 style="font-size: 0.9rem; color: #b5d909; margin-bottom: 8px; text-align: center; font-weight: bold;">
                             DESEMPENHO POR SDR
                         </h3>
 
                         <div style="overflow-x: auto;">
                             <table class="sdr-table" style="width: 100%; border-collapse: collapse;">
                                 <thead>
-                                    <tr style="border-bottom: 2px solid rgba(130, 160, 2, 0.5);">
-                                        <th style="padding: 16px; text-align: left; font-size: 0.9rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                                    <tr style="border-bottom: 1px solid rgba(130, 160, 2, 0.5);">
+                                        <th style="padding: 6px 10px; text-align: left; font-size: 0.7rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">
                                             SDR
                                         </th>
-                                        <th style="padding: 16px; text-align: center; font-size: 0.9rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                                        <th style="padding: 6px 10px; text-align: center; font-size: 0.7rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">
                                             Análises
                                         </th>
-                                        <th style="padding: 16px; text-align: center; font-size: 0.9rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
-                                            Análises Positivas
+                                        <th style="padding: 6px 10px; text-align: center; font-size: 0.7rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">
+                                            Análises +
                                         </th>
-                                        <th style="padding: 16px; text-align: center; font-size: 0.9rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                                        <th style="padding: 6px 10px; text-align: center; font-size: 0.7rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">
                                             Vendas
                                         </th>
                                     </tr>
@@ -631,17 +631,17 @@
                                         const cor = cores[index % cores.length];
 
                                         return `
-                                            <tr class="sdr-row" style="border-bottom: 1px solid rgba(130, 160, 2, 0.2);">
-                                                <td style="padding: 20px; font-size: 1.1rem; color: #ffffff; font-weight: 600; border-left: 4px solid ${cor};">
+                                            <tr class="sdr-row" style="border-bottom: 1px solid rgba(130, 160, 2, 0.15);">
+                                                <td style="padding: 8px 10px; font-size: 0.9rem; color: #ffffff; font-weight: 600; border-left: 3px solid ${cor};">
                                                     ${sdr.nome}
                                                 </td>
-                                                <td style="padding: 20px; text-align: center; font-size: 1.8rem; color: #b5d909; font-weight: bold;">
+                                                <td style="padding: 8px 10px; text-align: center; font-size: 1.3rem; color: #b5d909; font-weight: bold;">
                                                     ${sdr.analises}
                                                 </td>
-                                                <td style="padding: 20px; text-align: center; font-size: 1.8rem; color: #82a002; font-weight: bold;">
+                                                <td style="padding: 8px 10px; text-align: center; font-size: 1.3rem; color: #82a002; font-weight: bold;">
                                                     ${sdr.analisesPositivas}
                                                 </td>
-                                                <td style="padding: 20px; text-align: center; font-size: 1.8rem; color: #e5fc5a; font-weight: bold;">
+                                                <td style="padding: 8px 10px; text-align: center; font-size: 1.3rem; color: #e5fc5a; font-weight: bold;">
                                                     ${sdr.vendas}
                                                 </td>
                                             </tr>
@@ -649,17 +649,17 @@
                                     }).join('')}
 
                                     <!-- LINHA TOTAL -->
-                                    <tr style="background: rgba(130, 160, 2, 0.15); border-top: 2px solid rgba(130, 160, 2, 0.5);">
-                                        <td style="padding: 20px; font-size: 1.2rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase;">
+                                    <tr style="background: rgba(130, 160, 2, 0.15); border-top: 1px solid rgba(130, 160, 2, 0.5);">
+                                        <td style="padding: 8px 10px; font-size: 0.85rem; color: #e5fc5a; font-weight: 700; text-transform: uppercase;">
                                             TOTAL
                                         </td>
-                                        <td style="padding: 20px; text-align: center; font-size: 2rem; color: #b5d909; font-weight: bold;">
+                                        <td style="padding: 8px 10px; text-align: center; font-size: 1.4rem; color: #b5d909; font-weight: bold;">
                                             ${getSDRData().reduce((sum, sdr) => sum + sdr.analises, 0)}
                                         </td>
-                                        <td style="padding: 20px; text-align: center; font-size: 2rem; color: #82a002; font-weight: bold;">
+                                        <td style="padding: 8px 10px; text-align: center; font-size: 1.4rem; color: #82a002; font-weight: bold;">
                                             ${getSDRData().reduce((sum, sdr) => sum + sdr.analisesPositivas, 0)}
                                         </td>
-                                        <td style="padding: 20px; text-align: center; font-size: 2rem; color: #e5fc5a; font-weight: bold;">
+                                        <td style="padding: 8px 10px; text-align: center; font-size: 1.4rem; color: #e5fc5a; font-weight: bold;">
                                             ${getSDRData().reduce((sum, sdr) => sum + sdr.vendas, 0)}
                                         </td>
                                     </tr>
